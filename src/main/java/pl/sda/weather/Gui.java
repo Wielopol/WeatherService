@@ -29,12 +29,12 @@ public class Gui {
 
             switch (choose1) {
                 case "1":
-//                    controllersLocation.addLocation();
+                    controllersLocation.addLocation();
                     //TODO
                     // The user should be able to add a location to the file by entering the following values:
                     break;
                 case "2":
-//                   controllersLocation.displayLocation();
+                   controllersLocation.displayLocation();
                     //TODO
                     // By selecting the menu option, the user should be able to see all locations entered into the file.
                     break;
