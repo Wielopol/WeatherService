@@ -6,13 +6,15 @@ public class Weather {
     private final int humidity;
     private final float windDir;
     private final float windSpeed;
+    private final String city;
 
-    public Weather(float temperature, float pressure, int humidity, float windDir, float windSpeed) {
+    public Weather(float temperature, float pressure, int humidity, float windDir, float windSpeed, String city) {
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
         this.windDir = windDir;
         this.windSpeed = windSpeed;
+        this.city = city;
     }
 
     public float getTemperature() {
@@ -38,11 +40,12 @@ public class Weather {
     @Override
     public String toString() {
         return "Weather{" +
-                "temperature=" + temperature +
+                "city='" + city +
+                ", temperature=" + temperature +
                 ", pressure=" + pressure +
                 ", humidity=" + humidity +
                 ", windDir=" + windDir +
-                ", windSpeed=" + windSpeed +
+                ", windSpeed=" + windSpeed + '\'' +
                 '}';
     }
 

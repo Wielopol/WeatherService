@@ -2,12 +2,15 @@ package pl.sda.weather.controllers;
 
 
 import pl.sda.weather.model.LocationModel;
+import pl.sda.weather.model.Weather;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.impl.LocationServiceImpl;
+import pl.sda.weather.service.impl.ReadWeathersImpl;
 import pl.sda.weather.validation.LocationValidation;
 
 import javax.xml.validation.ValidatorHandler;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -15,6 +18,7 @@ import static pl.sda.weather.Gui.showMainMenu;
 
 public class ControllersLocation {
     ILocationService locationService = new LocationServiceImpl();
+    ReadWeathersImpl readWeathers = new ReadWeathersImpl();
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -94,5 +98,11 @@ public class ControllersLocation {
 
     }
 
+    public void displayWeathers() {
 
+        List<LocationModel> locationsList = locationService.getLocationModelFromFile();
+        Map<String, Weather> weathersMap = readWeathers.mapWeather();
+
+        readWeathers.listWeathers(locationsList,weathersMap).forEach(System.out::println);
+    }
 }

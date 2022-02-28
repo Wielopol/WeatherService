@@ -1,6 +1,7 @@
 package pl.sda.weather.service.impl;
 
 import com.google.gson.Gson;
+import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.WeatherLine;
 import pl.sda.weather.service.ReadWeathers;
@@ -9,10 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ReadWeathersImpl implements ReadWeathers {
@@ -23,7 +21,7 @@ public class ReadWeathersImpl implements ReadWeathers {
         Map<String,Weather> weatherMap = new HashMap<>();
         for (WeatherLine w : weatherLines) {
             Weather weather = new Weather(w.getMainWeather().getTemp(), w.getMainWeather().getPressure(),
-                    w.getMainWeather().getHumidity(), w.getWind().getDeg(), w.getWind().getSpeed());
+                    w.getMainWeather().getHumidity(), w.getWind().getDeg(), w.getWind().getSpeed(), w.getCity().getName());
             weatherMap.put(w.getCity().getName(),weather);
         }
         return weatherMap;
@@ -40,5 +38,14 @@ public class ReadWeathersImpl implements ReadWeathers {
             System.err.println(e.getMessage());
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<Weather> listWeathers(List<LocationModel> citiesList, Map<String,Weather> weatherMap) {
+        List<Weather> weatherList = new LinkedList<>();
+        for (LocationModel city : citiesList) {
+            weatherList.add(weatherMap.get(city.getCityName()));
+        }
+        return weatherList;
     }
 }
