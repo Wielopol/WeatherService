@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class LocationModel {
     private String id;
-    //longitude and latitude according to geographical values ​​(latitude: -90 -> S, 90 -> N, longitude: -180 -> W, 180 -> E)
+
     private String longitudeAndLatitude;
-    //city name - cannot be empty
+
     private String cityName;
-    //region - optional: may be null
+
     private String region;
-    //Country name - cannot be empty
+
     private String countryName;
 
     public LocationModel(String id, String longitudeAndLatitude, String cityName, String region, String countryName) {

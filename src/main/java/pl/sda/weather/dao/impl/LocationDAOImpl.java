@@ -23,7 +23,6 @@ public class LocationDAOImpl implements ILocationDAO {
     public void addLocationModelToDB(LocationModel locationModel) {
 
         try {
-
             Files.write(Paths.get(ClassLoader.getSystemResource(FILE_LOCATION).toURI()),
                     (locationModel.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
         } catch (IOException | URISyntaxException e) {
@@ -39,7 +38,7 @@ public class LocationDAOImpl implements ILocationDAO {
         List<String[]> lines = getLinesFromFile();
 
         return lines.stream()
-                .map(line -> new LocationModel(line[0], line[1], line[2],line[3], line[4]))
+                .map(line -> new LocationModel(line[0], line[1], line[2], line[3], line[4]))
                 .collect(Collectors.toList());
     }
 
