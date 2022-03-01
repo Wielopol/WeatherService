@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class ReadWeathersImpl implements ReadWeathers {
 
     @Override
-    public Map<String, Weather> mapWeather() {
+    public Map<String, Weather> getWeatherMap() {
         List<WeatherLine> weatherLines = readWeather();
         Map<String,Weather> weatherMap = new HashMap<>();
         for (WeatherLine w : weatherLines) {

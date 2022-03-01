@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface ReadWeathers {
 
-    Map<String,Weather> mapWeather();
+    Map<String,Weather> getWeatherMap();
 
     List<WeatherLine> readWeather();
 

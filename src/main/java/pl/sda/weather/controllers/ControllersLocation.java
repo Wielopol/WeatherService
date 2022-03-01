@@ -8,7 +8,6 @@ import pl.sda.weather.service.impl.LocationServiceImpl;
 import pl.sda.weather.service.impl.ReadWeathersImpl;
 import pl.sda.weather.validation.LocationValidation;
 
-import javax.xml.validation.ValidatorHandler;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -101,8 +100,9 @@ public class ControllersLocation {
     public void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromFile();
-        Map<String, Weather> weathersMap = readWeathers.mapWeather();
+        Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
-        readWeathers.listWeathers(locationsList,weathersMap).forEach(System.out::println);
+        readWeathers.listWeathers(locationsList,weathersMap)
+                .forEach(w -> System.out.println(w == null ? "There is no weather for this Location" : w));
     }
 }
