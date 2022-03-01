@@ -30,18 +30,15 @@ public class Gui {
             switch (choose1) {
                 case "1":
                     LOCATION_CONTROLLER.addLocation();
-                    //TODO
-                    // The user should be able to add a location to the file by entering the following values:
+
                     break;
                 case "2":
                    LOCATION_CONTROLLER.displayLocation();
-                    //TODO
-                    // By selecting the menu option, the user should be able to see all locations entered into the file.
+
                     break;
                 case "3":
                     LOCATION_CONTROLLER.displayWeathers();
-                    //TODO
-                    //Downloading weather data from external services
+
                     break;
                 case "4":
 //                    showInfo("opcja 4");

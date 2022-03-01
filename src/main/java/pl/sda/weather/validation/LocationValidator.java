@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class LocationValidator {
 
     public boolean validationCoordinates(String name) {
-        Pattern recipientPackage = Pattern.compile("^[0-9]{3}$");
+        Pattern recipientPackage = Pattern.compile("[0-9]{3}\\.[0-9]{2}");
         Matcher n = recipientPackage.matcher(name);
         return !name.isBlank() || n.find();
     }

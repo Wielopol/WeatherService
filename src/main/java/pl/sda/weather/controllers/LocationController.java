@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class LocationController {
 
-    private static final  ILocationService locationService = new LocationServiceImpl();
+    private static final ILocationService locationService = new LocationServiceImpl();
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -28,7 +28,26 @@ public class LocationController {
 
         String idUUID = String.valueOf(UUID.randomUUID());
 
-       String longitudeAndLatitude = "Location TODO ";
+        String longitude;
+        String latitude;
+
+        do {
+            System.out.println("Write city latitude in format (000.00) : ");
+            latitude = scanner.nextLine();
+            if (!validation.validationCoordinates(latitude)) {
+                System.out.println("Enter the name, this field cannot be empty !!! ");
+            }
+        } while (!validation.validationCoordinates(latitude));
+
+        do {
+            System.out.println("Write city longitude in format (000.00) : ");
+            longitude = scanner.nextLine();
+            if (!validation.validationCoordinates(longitude)) {
+                System.out.println("Enter the name, this field cannot be empty !!! ");
+            }
+        } while (!validation.validationCoordinates(longitude));
+        String longitudeAndLatitude = "latitude: " + latitude + "; longitude: " + longitude;
+
 
         String cityName;
         do {
@@ -56,26 +75,39 @@ public class LocationController {
 
         } while (!validation.validationNames(countryName));
 
-        locationService.addLocationModelToDB(new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName));
+        locationService.addLocationModelToTxtDB(new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName));
+        locationService.addLocationModelJsonToDB(new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName));
 
     }
 
     public void displayLocation() {
 
-        List<LocationModel> list = locationService.getLocationModelFromFile();
+        List<LocationModel> listTxt = locationService.getLocationModelFromFileTxt();
+        List<LocationModel> listJson = locationService.getLocationModelFromFileJson();
 
-        list.stream()
+        System.out.println("--------------------------------");
+        System.out.println("List of Localization in format .txt ");
+        System.out.println("--------------------------------");
+        listTxt.stream()
                 .forEach(System.out::println);
+
+        System.out.println("--------------------------------");
+        System.out.println("List of Localization in format .json ");
+        System.out.println("--------------------------------");
+
+        listJson.stream()
+                .forEach(System.out::println);
+        System.out.println("--------------------------------");
 
 
     }
 
     public void displayWeathers() {
 
-        List<LocationModel> locationsList = locationService.getLocationModelFromFile();
+        List<LocationModel> locationsList = locationService.getLocationModelFromFileTxt();
         Map<String, Weather> weathersMap = readWeathers.mapWeather();
 
-        readWeathers.listWeathers(locationsList,weathersMap).forEach(System.out::println);
+        readWeathers.listWeathers(locationsList, weathersMap).forEach(System.out::println);
     }
 
 

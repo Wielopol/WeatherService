@@ -14,4 +14,5 @@ public interface ILocationRepository {
 
     List<LocationModel> getLocationModelFromFileTxt();
 
+    List<LocationModel> getLocationModelFromFileJson();
 }

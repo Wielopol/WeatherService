@@ -8,7 +8,11 @@ import java.util.List;
 public interface ILocationService {
 
 
-    void addLocationModelToDB(LocationModel locationModel);
+    void addLocationModelToTxtDB(LocationModel locationModel);
 
-    List<LocationModel> getLocationModelFromFile();
+    List<LocationModel> getLocationModelFromFileTxt();
+
+    void addLocationModelJsonToDB(LocationModel locationModel);
+
+    List<LocationModel> getLocationModelFromFileJson();
 }
