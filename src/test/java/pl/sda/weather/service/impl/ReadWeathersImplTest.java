@@ -16,24 +16,38 @@ class ReadWeathersImplTest {
 
     ReadWeathersImpl readWeathers = new ReadWeathersImpl();
 
+//    @Test
+//    void readWeather() {
+//
+//        List<WeatherLine> result = readWeathers.readWeather();
+//
+//        WeatherLine weatherLine = result.get(5);
+//
+//        WeatherLine expected = new WeatherLine();
+//
+//        assertThat(weatherLine).isEqualTo(expected);
+//    }
+
     @Test
-    void readWeather() {
-
-        List<WeatherLine> expected = new ArrayList<>();
-
-        List<WeatherLine> result = readWeathers.readWeather();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    void getWeatherMap() {
-
-        Map<String, Weather> expected = new HashMap<>();
+    void getWeatherMapNotNull() {
 
         Map<String, Weather> result = readWeathers.getWeatherMap();
 
-        assertThat(result).isEqualTo(expected);
+        Weather weather = result.get("Zatory");
+
+        Weather expected = new Weather((float) 291.78, (float) 1010.0, 61, 120, (float) 6.2, "Zatory");
+
+        assertThat(weather).isEqualTo(expected);
+    }
+
+    @Test
+    void getWeatherMapNull() {
+
+        Map<String, Weather> result = readWeathers.getWeatherMap();
+
+        Weather weather = result.get("Zatoryy");
+
+        assertThat(weather).isNull();
     }
 
     @Test
