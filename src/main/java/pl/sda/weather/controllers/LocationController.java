@@ -21,7 +21,7 @@ public class LocationController {
 
     private static LocationValidator validation = new LocationValidator();
 
-    ReadWeathersImpl readWeathers = new ReadWeathersImpl();
+   private static ReadWeathersImpl readWeathers = new ReadWeathersImpl();
 
 
     public void addLocation() {
