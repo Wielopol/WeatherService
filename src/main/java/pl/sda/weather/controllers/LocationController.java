@@ -21,7 +21,7 @@ public class LocationController {
 
     private static LocationValidator validation = new LocationValidator();
 
-   private static ReadWeathersImpl readWeathers = new ReadWeathersImpl();
+    private static final ReadWeathersImpl readWeathers = new ReadWeathersImpl();
 
 
     public void addLocation() {
@@ -105,9 +105,10 @@ public class LocationController {
     public void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromFileTxt();
-        Map<String, Weather> weathersMap = readWeathers.mapWeather();
+        Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
-        readWeathers.listWeathers(locationsList, weathersMap).forEach(System.out::println);
+        readWeathers.listWeathers(locationsList, weathersMap)
+                .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
     }
 
 
