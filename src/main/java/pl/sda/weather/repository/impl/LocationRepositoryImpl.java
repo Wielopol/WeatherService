@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -56,11 +57,16 @@ public class LocationRepositoryImpl implements ILocationRepository {
     }
     @Override
     public List<LocationModel> getLocationModelFromFileJson() {
-        List<String[]> lines = getLinesFromFileJson();
+//        List<String[]> lines = getLinesFromFileJson();
 
-        return lines.stream()
-                .map(line -> new LocationModel(line[0], line[1], line[2], line[3], line[4]))
-                .collect(Collectors.toList());
+        Gson gson = new Gson();
+
+        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
+            return stream.map(s -> gson.fromJson(s,LocationModel.class)).toList();
+        } catch (IOException  e) {
+            System.err.println("Unable to read the file.");
+        }
+        return Collections.emptyList();
     }
 
 

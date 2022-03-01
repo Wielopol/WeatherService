@@ -104,12 +104,10 @@ public class LocationController {
 
     public void displayWeathers() {
 
-        List<LocationModel> locationsList = locationService.getLocationModelFromFileTxt();
+        List<LocationModel> locationsList = locationService.getLocationModelFromFileJson();
         Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
         readWeathers.listWeathers(locationsList, weathersMap)
                 .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
     }
-
-
 }
