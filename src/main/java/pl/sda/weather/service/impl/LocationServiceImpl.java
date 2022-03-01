@@ -10,23 +10,12 @@ import java.util.List;
 
 public class LocationServiceImpl implements ILocationService {
 
-
     ILocationRepository locationDAO = new LocationRepositoryImpl();
 
-
-
-
-    @Override
-    public void addLocationModelToTxtDB(LocationModel locationModel) {
-
-        this.locationDAO.addLocationModelToTxtDB(locationModel);
-
-    }
-
-    @Override
-    public List<LocationModel> getLocationModelFromFileTxt() {
-        return this.locationDAO.getLocationModelFromFileTxt();
-    }
+@Override
+public void cleanFile(){
+    this.locationDAO.cleanFile();
+}
 
     @Override
     public void addLocationModelJsonToDB(LocationModel locationModel){

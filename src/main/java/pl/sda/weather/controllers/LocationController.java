@@ -19,7 +19,7 @@ public class LocationController {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    private static LocationValidator validation = new LocationValidator();
+    private static final LocationValidator validation = new LocationValidator();
 
     private static final ReadWeathersImpl readWeathers = new ReadWeathersImpl();
 
@@ -74,28 +74,19 @@ public class LocationController {
             }
 
         } while (!validation.validationNames(countryName));
-
-        locationService.addLocationModelToTxtDB(new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName));
         locationService.addLocationModelJsonToDB(new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName));
 
     }
 
     public void displayLocation() {
 
-        List<LocationModel> listTxt = locationService.getLocationModelFromFileTxt();
         List<LocationModel> listJson = locationService.getLocationModelFromFileJson();
-
-        System.out.println("--------------------------------");
-        System.out.println("List of Localization in format .txt ");
-        System.out.println("--------------------------------");
-        listTxt.stream()
-                .forEach(System.out::println);
 
         System.out.println("--------------------------------");
         System.out.println("List of Localization in format .json ");
         System.out.println("--------------------------------");
 
-        listJson.stream()
+        listJson
                 .forEach(System.out::println);
         System.out.println("--------------------------------");
 
@@ -104,11 +95,14 @@ public class LocationController {
 
     public void displayWeathers() {
 
-        List<LocationModel> locationsList = locationService.getLocationModelFromFileTxt();
+        List<LocationModel> locationsList = locationService.getLocationModelFromFileJson();
         Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
         readWeathers.listWeathers(locationsList, weathersMap)
                 .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
+    }
+    public void cleanFile(){
+        locationService.cleanFile();
     }
 
 

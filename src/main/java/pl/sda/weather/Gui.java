@@ -40,6 +40,7 @@ public class Gui {
 
                     break;
                 case "0":
+                    LOCATION_CONTROLLER.cleanFile();
                     break;
                 default:
                     System.out.println("Wrong choice !!");
