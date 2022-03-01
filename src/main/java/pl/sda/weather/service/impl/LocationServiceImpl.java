@@ -19,13 +19,13 @@ public class LocationServiceImpl implements ILocationService {
     @Override
     public void addLocationModelToDB(LocationModel locationModel) {
 
-        this.locationDAO.addLocationModelToDB(locationModel);
+        this.locationDAO.addLocationModelToTxtDB(locationModel);
 
     }
 
     @Override
     public List<LocationModel> getLocationModelFromFile() {
-        return this.locationDAO.getLocationModelFromFile();
+        return this.locationDAO.getLocationModelFromFileTxt();
     }
 
 }

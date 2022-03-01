@@ -39,7 +39,7 @@ public class Gui {
                     // By selecting the menu option, the user should be able to see all locations entered into the file.
                     break;
                 case "3":
-                    controllersLocation.displayWeathers();
+                    LOCATION_CONTROLLER.displayWeathers();
                     //TODO
                     //Downloading weather data from external services
                     break;
