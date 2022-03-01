@@ -2,14 +2,14 @@ package pl.sda.weather;
 
 
 
-import pl.sda.weather.controllers.ControllersLocation;
+import pl.sda.weather.controllers.LocationController;
 
 import java.util.Scanner;
 
 
 public class Gui {
 
-    private static final ControllersLocation controllersLocation = new ControllersLocation();
+    private static final LocationController LOCATION_CONTROLLER = new LocationController();
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -29,12 +29,12 @@ public class Gui {
 
             switch (choose1) {
                 case "1":
-                    controllersLocation.addLocation();
+                    LOCATION_CONTROLLER.addLocation();
                     //TODO
                     // The user should be able to add a location to the file by entering the following values:
                     break;
                 case "2":
-                   controllersLocation.displayLocation();
+                   LOCATION_CONTROLLER.displayLocation();
                     //TODO
                     // By selecting the menu option, the user should be able to see all locations entered into the file.
                     break;
