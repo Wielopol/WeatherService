@@ -107,7 +107,8 @@ public class LocationController {
         List<LocationModel> locationsList = locationService.getLocationModelFromFileTxt();
         Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
-        readWeathers.listWeathers(locationsList, weathersMap).forEach(System.out::println);
+        readWeathers.listWeathers(locationsList, weathersMap)
+                .forEach(w -> System.out.println(w == null ? "There is no weather for this Location" : w));
     }
 
 
