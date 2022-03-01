@@ -1,16 +1,15 @@
-package pl.sda.weather.service;
+package pl.sda.weather.repository;
 
 
 import pl.sda.weather.model.LocationModel;
 
 import java.util.List;
 
-public interface ILocationService {
-
-
-    void cleanFile();
+public interface ILocationRepository {
 
     void addLocationModelJsonToDB(LocationModel locationModel);
 
     List<LocationModel> getLocationModelFromFileJson();
+
+    void cleanFile();
 }
