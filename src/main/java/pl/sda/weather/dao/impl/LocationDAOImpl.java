@@ -5,7 +5,6 @@ import pl.sda.weather.dao.ILocationDAO;
 import pl.sda.weather.model.LocationModel;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -16,16 +15,18 @@ import java.util.stream.Stream;
 
 public class LocationDAOImpl implements ILocationDAO {
 
-    private static final String FILE_LOCATION = "location/locations.txt";
+    private static final String FILE_LOCATION = "src/main/resources/location/locations.txt";
 
     @Override
 
     public void addLocationModelToDB(LocationModel locationModel) {
 
+
+
         try {
-            Files.write(Paths.get(ClassLoader.getSystemResource(FILE_LOCATION).toURI()),
+            Files.write(Paths.get(FILE_LOCATION),
                     (locationModel.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             System.err.println("Unable to write the file.");
 
         }
@@ -47,13 +48,13 @@ public class LocationDAOImpl implements ILocationDAO {
         List<String[]> lines = new ArrayList<>();
 
 
-        try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(FILE_LOCATION).toURI()))) {
+        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION))) {
             lines = stream
 
                     .map(line -> line.split(","))
                     .collect(Collectors.toList());
 
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException  e) {
             System.err.println("Unable to read the file.");
         }
 

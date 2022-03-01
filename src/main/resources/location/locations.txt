@@ -1,0 +1,5 @@
+4b5f417d-b193-4ce8-b63b-f0983e087501,(latitude: SS -> S; SS -> N; longitude: SS -> W; SS -> E),KRK,MAŁ,POL
+4b5f417d-b193-4ce8-b63b-f0983e087501,(latitude: SS -> S; SS -> N; longitude: SS -> W; SS -> E),KRKGGG,MAŁGGG,POL
+6e9c7139-45f4-4ada-8307-af44961af1eb,(latitude: 111 -> S; 11 -> N; longitude: 22 -> W; 44 -> E),krrr,mllll,polll
+a8ab2543-1f3c-409d-9000-da06bf3bcb6c,(latitude: 1 -> S; 1 -> N; longitude: 1 -> W; 1 -> E),1,1,1
+662da5e6-31ef-4872-82cb-4915a07f37b9,lok,d,User don't add regional,d
