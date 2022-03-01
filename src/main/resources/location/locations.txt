@@ -1,2 +1,0 @@
-acd07c55-09d9-406d-b921-6865410a4764,latitude: 002.22; longitude: 222.66,Krakow,Małopolska,Polska
-afb21d1c-5ac5-4e89-8373-31bc87579a08,latitude: 666.66; longitude: 666.99,Warszawa,Wielkopolska,Polska
