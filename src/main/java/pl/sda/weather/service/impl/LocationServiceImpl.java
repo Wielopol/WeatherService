@@ -1,7 +1,7 @@
 package pl.sda.weather.service.impl;
 
-import pl.sda.weather.dao.ILocationDAO;
-import pl.sda.weather.dao.impl.LocationDAOImpl;
+import pl.sda.weather.repository.ILocationRepository;
+import pl.sda.weather.repository.impl.LocationRepositoryImpl;
 import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.service.ILocationService;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class LocationServiceImpl implements ILocationService {
 
 
-    ILocationDAO locationDAO = new LocationDAOImpl();
+    ILocationRepository locationDAO = new LocationRepositoryImpl();
 
 
 

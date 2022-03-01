@@ -1,7 +1,7 @@
-package pl.sda.weather.dao.impl;
+package pl.sda.weather.repository.impl;
 
 
-import pl.sda.weather.dao.ILocationDAO;
+import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.model.LocationModel;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LocationDAOImpl implements ILocationDAO {
+public class LocationRepositoryImpl implements ILocationRepository {
 
     private static final String FILE_LOCATION = "src/main/resources/location/locations.txt";
 

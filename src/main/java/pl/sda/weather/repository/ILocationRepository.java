@@ -1,11 +1,11 @@
-package pl.sda.weather.dao;
+package pl.sda.weather.repository;
 
 
 import pl.sda.weather.model.LocationModel;
 
 import java.util.List;
 
-public interface ILocationDAO {
+public interface ILocationRepository {
 
 
     void addLocationModelToDB(LocationModel locationModel);
