@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ILocationRepository {
 
-    void addLocationModelJsonToDB(LocationModel locationModel);
-
-    List<LocationModel> getLocationModelFromFileJson();
+    void addLocationModelToDB(LocationModel locationModel);
 
     void cleanFile();
+
+    List<String[]> getDataFromDB();
 }

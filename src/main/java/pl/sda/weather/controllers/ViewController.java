@@ -6,30 +6,30 @@ import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.Weather;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.impl.LocationServiceImpl;
-import pl.sda.weather.service.impl.ReadWeathersImpl;
+import pl.sda.weather.service.impl.IReadWeathersServiceImpl;
 
 import java.util.List;
 import java.util.Map;
 
-public class LocationController {
+public class ViewController {
 
     private static final ILocationService locationService = new LocationServiceImpl();
 
     private static final Gui gui = new Gui();
 
-    private static final ReadWeathersImpl readWeathers = new ReadWeathersImpl();
+    private static final IReadWeathersServiceImpl readWeathersService = new IReadWeathersServiceImpl();
 
 
     public void addLocation() {
 
-        locationService.addLocationModelJsonToDB(gui.getDataToLocalModelFromUser());
+        locationService.addLocationModelToDB(gui.getDataToLocalModelFromUser());
 
     }
 
 
     public void displayLocation() {
 
-        List<LocationModel> list = locationService.getLocationModelFromFileJson();
+        List<LocationModel> list = locationService.getLocationModelFromBD();
 
         System.out.println("--------------------------------");
         System.out.println("List of Localization !!! ");
@@ -43,15 +43,15 @@ public class LocationController {
 
     public void displayWeathers() {
 
-        List<LocationModel> locationsList = locationService.getLocationModelFromFileJson();
-        Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
+        List<LocationModel> locationsList = locationService.getLocationModelFromBD();
+        Map<String, Weather> weathersMap = readWeathersService.getWeatherMap();
 
-        readWeathers.listWeathers(locationsList, weathersMap)
+        readWeathersService.listWeathers(locationsList, weathersMap)
                 .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
     }
 
     public void cleanFile() {
-        locationService.cleanFile();
+        locationService.cleanDBWithLocalModel();
     }
 
 

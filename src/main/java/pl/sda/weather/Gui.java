@@ -2,7 +2,7 @@ package pl.sda.weather;
 
 
 
-import pl.sda.weather.controllers.LocationController;
+import pl.sda.weather.controllers.ViewController;
 import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.validation.LocationValidator;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class Gui {
 
-    private static final LocationController LOCATION_CONTROLLER = new LocationController();
+    private static final ViewController LOCATION_CONTROLLER = new ViewController();
 
     private static final LocationValidator validation = new LocationValidator();
 

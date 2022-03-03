@@ -7,11 +7,10 @@ import pl.sda.weather.model.WeatherLine;
 import java.util.List;
 import java.util.Map;
 
-public interface ReadWeathers {
+public interface IReadWeathersService {
 
     Map<String,Weather> getWeatherMap();
 
-    List<WeatherLine> readWeather();
 
     List<Weather> listWeathers(List<LocationModel> citiesList, Map<String,Weather> weatherMap);
 }

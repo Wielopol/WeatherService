@@ -19,29 +19,18 @@ public class LocationRepositoryImpl implements ILocationRepository {
     private static final String FILE_LOCATION_JSON = "src/main/resources/location/locations.json";
 
 
-
     @Override
-    public void addLocationModelJsonToDB(LocationModel locationModel){
+    public void addLocationModelToDB(LocationModel locationModel) {
         Gson gson = new Gson();
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON),
-                    (gson.toJson(locationModel) + System.lineSeparator()) .getBytes(), StandardOpenOption.APPEND);
+                    (gson.toJson(locationModel) + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
 
         } catch (IOException e) {
             System.err.println("Unable to write the file.");
-
         }
     }
 
-
-    @Override
-    public List<LocationModel> getLocationModelFromFileJson() {
-        List<String[]> lines = getLinesFromFileJson();
-
-        return lines.stream()
-                .map(line -> new LocationModel(line[0], line[1], line[2], line[3], line[4]))
-                .collect(Collectors.toList());
-    }
 
     @Override
     public void cleanFile() {
@@ -52,15 +41,14 @@ public class LocationRepositoryImpl implements ILocationRepository {
         }
     }
 
-
-
-    public List<String[]> getLinesFromFileJson() {
-       List<String[]> lines = new ArrayList<>();
+    @Override
+    public List<String[]> getDataFromDB() {
+        List<String[]> lines = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
             lines = stream
                     .map(line -> line.split(","))
                     .collect(Collectors.toList());
-        } catch (IOException  e) {
+        } catch (IOException e) {
             System.err.println("Unable to read the file.");
         }
         return lines;

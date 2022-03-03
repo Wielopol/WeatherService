@@ -1,23 +1,22 @@
 package pl.sda.weather.service.impl;
 
-import com.google.gson.Gson;
 import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.WeatherLine;
-import pl.sda.weather.service.ReadWeathers;
+import pl.sda.weather.repository.IReadWeatherRepository;
+import pl.sda.weather.repository.impl.ReadWeatherRepositoryImpl;
+import pl.sda.weather.service.IReadWeathersService;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.*;
-import java.util.stream.Stream;
 
-public class ReadWeathersImpl implements ReadWeathers {
+public class IReadWeathersServiceImpl implements IReadWeathersService {
+
+    IReadWeatherRepository weatherRepository = new ReadWeatherRepositoryImpl();
 
     @Override
     public Map<String, Weather> getWeatherMap() {
-        List<WeatherLine> weatherLines = readWeather();
+        List<WeatherLine> weatherLines = weatherRepository.readWeather();
         Map<String,Weather> weatherMap = new HashMap<>();
         for (WeatherLine w : weatherLines) {
             Weather weather = new Weather(w.getMainWeather().getTemp(), w.getMainWeather().getPressure(),
@@ -27,18 +26,7 @@ public class ReadWeathersImpl implements ReadWeathers {
         return weatherMap;
     }
 
-    @Override
-    public List<WeatherLine> readWeather() {
-        String FILE_PATH = "location/weather.json";
-        Gson gson = new Gson();
 
-        try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(FILE_PATH).toURI()))) {
-            return stream.map(s -> gson.fromJson(s, WeatherLine.class)).toList();
-        } catch (IOException | URISyntaxException e) {
-            System.err.println(e.getMessage());
-        }
-        return Collections.emptyList();
-    }
 
     @Override
     public List<Weather> listWeathers(List<LocationModel> citiesList, Map<String,Weather> weatherMap) {
