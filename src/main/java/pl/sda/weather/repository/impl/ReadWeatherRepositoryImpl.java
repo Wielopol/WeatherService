@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class ReadWeatherRepositoryImpl implements IReadWeatherRepository {
 
-    String FILE_PATH = "location/weather.json";
+    String FILE_PATH = "src/main/resources/location/weather.json";
 
     private static final Gson gson = new Gson();
 
@@ -22,12 +22,13 @@ public class ReadWeatherRepositoryImpl implements IReadWeatherRepository {
 
     public List<WeatherLine> readWeather() {
 
-        try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(FILE_PATH).toURI()))) {
+        try (Stream<String> stream = Files.lines(Paths.get(FILE_PATH))) {
             return stream.map(s -> gson.fromJson(s, WeatherLine.class)).toList();
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
         return Collections.emptyList();
     }
+
 
 }
