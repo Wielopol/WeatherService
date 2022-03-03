@@ -2,14 +2,12 @@ package pl.sda.weather.controllers;
 
 
 import pl.sda.weather.model.LocationModel;
-import pl.sda.weather.model.Weather;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.impl.LocationServiceImpl;
-import pl.sda.weather.service.impl.ReadWeathersImpl;
+import pl.sda.weather.service.impl.ReadWeatherApiImpl;
 import pl.sda.weather.validation.LocationValidator;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -21,8 +19,7 @@ public class LocationController {
 
     private static final LocationValidator validation = new LocationValidator();
 
-    private static final ReadWeathersImpl readWeathers = new ReadWeathersImpl();
-
+    private static final ReadWeatherApiImpl weatherApi = new ReadWeatherApiImpl();
 
     public void addLocation() {
 
@@ -96,9 +93,8 @@ public class LocationController {
     public void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromFileJson();
-        Map<String, Weather> weathersMap = readWeathers.getWeatherMap();
 
-        readWeathers.listWeathers(locationsList, weathersMap)
+        weatherApi.listWeathers(locationsList)
                 .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
     }
     public void cleanFile(){
