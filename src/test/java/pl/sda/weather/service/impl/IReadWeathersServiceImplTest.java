@@ -16,19 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IReadWeathersServiceImplTest {
 
-    IReadWeatherRepository readWeathers = new ReadWeatherRepositoryImpl();
-
-//    @Test
-//    void readWeather() {
-//
-//        List<WeatherLine> result = readWeathers.readWeather();
-//
-//        WeatherLine weatherLine = result.get(5);
-//
-//        WeatherLine expected = new WeatherLine();
-//
-//        assertThat(weatherLine).isEqualTo(expected);
-//    }
+    IReadWeathersServiceImpl readWeathers = new IReadWeathersServiceImpl();
 
     @Test
     void getWeatherMapNotNull() {
