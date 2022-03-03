@@ -1,19 +1,16 @@
-package pl.sda.weather.service.impl;
+package pl.sda.weather.repository.impl;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.WeatherApi;
-import pl.sda.weather.service.ReadWeatherApi;
+import pl.sda.weather.repository.IWeatherRepository;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
-public class ReadWeatherApiImpl implements ReadWeatherApi {
+public class WeatherRepositoryImpl implements IWeatherRepository {
 
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -52,12 +49,4 @@ public class ReadWeatherApiImpl implements ReadWeatherApi {
         return null;
     }
 
-    @Override
-    public List<Weather> listWeathers(List<LocationModel> citiesList) {
-        List<Weather> weatherList = new LinkedList<>();
-        for (LocationModel city : citiesList) {
-            weatherList.add(readWeather(city.getCityName()));
-        }
-        return weatherList;
-    }
 }

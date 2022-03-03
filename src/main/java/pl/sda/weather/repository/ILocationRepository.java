@@ -9,7 +9,8 @@ public interface ILocationRepository {
 
     void addLocationModelToDB(LocationModel locationModel);
 
-    void cleanFile();
+    List<LocationModel> getLocationModelDataFromDB();
 
-    List<String[]> getDataFromDB();
+
+    void cleanFile();
 }

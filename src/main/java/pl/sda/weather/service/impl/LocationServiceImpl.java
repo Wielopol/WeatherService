@@ -26,11 +26,7 @@ public class LocationServiceImpl implements ILocationService {
 
     @Override
     public List<LocationModel> getLocationModelFromBD() {
-        List<String[]> lines = locationRepository.getDataFromDB();
-
-        return lines.stream()
-                .map(line -> new LocationModel(line[0], line[1], line[2], line[3], line[4]))
-                .collect(Collectors.toList());
+        return this.locationRepository.getLocationModelDataFromDB();
 
 
     }

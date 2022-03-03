@@ -3,13 +3,13 @@ package pl.sda.weather.controllers;
 
 import pl.sda.weather.Gui;
 import pl.sda.weather.model.LocationModel;
-import pl.sda.weather.model.Weather;
 import pl.sda.weather.service.ILocationService;
+import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceImpl;
-import pl.sda.weather.service.impl.IReadWeathersServiceImpl;
+
+import pl.sda.weather.service.impl.IWeatherServiceImpl;
 
 import java.util.List;
-import java.util.Map;
 
 public class ViewController {
 
@@ -17,7 +17,7 @@ public class ViewController {
 
     private static final Gui gui = new Gui();
 
-    private static final IReadWeathersServiceImpl readWeathersService = new IReadWeathersServiceImpl();
+    private static final IWeatherService readWeathersService = new IWeatherServiceImpl();
 
 
     public void addLocation() {
@@ -41,18 +41,25 @@ public class ViewController {
 
     }
 
-    public void displayWeathers() {
+    public static void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromBD();
-        Map<String, Weather> weathersMap = readWeathersService.getWeatherMap();
 
-        readWeathersService.listWeathers(locationsList, weathersMap)
-                .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
+
+        try {
+            readWeathersService.listWeathers(locationsList)
+                    .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void cleanFile() {
         locationService.cleanDBWithLocalModel();
     }
+
 
 
 }

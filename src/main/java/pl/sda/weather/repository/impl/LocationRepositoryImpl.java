@@ -9,20 +9,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LocationRepositoryImpl implements ILocationRepository {
 
     private static final String FILE_LOCATION_JSON = "src/main/resources/location/locations.json";
-
+    Gson gson = new Gson();
 
     @Override
     public void addLocationModelToDB(LocationModel locationModel) {
-        Gson gson = new Gson();
+
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON),
                     (gson.toJson(locationModel) + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
@@ -30,6 +28,18 @@ public class LocationRepositoryImpl implements ILocationRepository {
         } catch (IOException e) {
             System.err.println("Unable to write the file.");
         }
+    }
+
+    @Override
+    public List<LocationModel> getLocationModelDataFromDB() {
+
+        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
+            return stream.map(s -> gson.fromJson(s, LocationModel.class)).toList();
+        } catch (IOException e) {
+            System.err.println("Unable to clear the file");
+        }
+        return Collections.emptyList();
+
     }
 
 
@@ -42,17 +52,5 @@ public class LocationRepositoryImpl implements ILocationRepository {
         }
     }
 
-    @Override
-    public List<String[]> getDataFromDB() {
-        List<String[]> lines = new ArrayList<>();
-        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
-            lines = stream
-                    .map(line -> line.split(","))
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            System.err.println("Unable to read the file.");
-        }
-        return lines;
-    }
 
 }
