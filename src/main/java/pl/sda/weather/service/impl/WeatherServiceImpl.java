@@ -9,7 +9,7 @@ import pl.sda.weather.service.IWeatherService;
 import java.util.LinkedList;
 import java.util.List;
 
-public class IWeatherServiceImpl implements IWeatherService {
+public class WeatherServiceImpl implements IWeatherService {
 
     private static IWeatherRepository readWeatherRepository = new WeatherRepositoryImpl();
 
@@ -22,9 +22,7 @@ public class IWeatherServiceImpl implements IWeatherService {
         return weatherList;
     }
 
-    public static void main(String[] args) {
 
-    }
 
 
 

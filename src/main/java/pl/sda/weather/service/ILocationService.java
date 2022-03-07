@@ -13,4 +13,6 @@ public interface ILocationService {
     void addLocationModelToDB(LocationModel locationModel);
 
     List<LocationModel> getLocationModelFromBD();
+
+    List<LocationModel> getLocationModelFromDbAfterIdOrName(String patternToSearch);
 }

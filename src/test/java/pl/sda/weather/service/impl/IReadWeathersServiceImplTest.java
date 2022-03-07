@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IReadWeathersServiceImplTest {
 
     IWeatherRepository weatherRepository = new WeatherRepositoryImpl();
-    IWeatherService weatherService = new IWeatherServiceImpl();
+    IWeatherService weatherService = new WeatherServiceImpl();
 
 //    @Test
 //    void getWeatherMapNotNull() {

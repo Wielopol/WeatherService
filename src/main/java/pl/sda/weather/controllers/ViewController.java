@@ -7,7 +7,7 @@ import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceImpl;
 
-import pl.sda.weather.service.impl.IWeatherServiceImpl;
+import pl.sda.weather.service.impl.WeatherServiceImpl;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class ViewController {
 
     private static final Gui gui = new Gui();
 
-    private static final IWeatherService readWeathersService = new IWeatherServiceImpl();
+    private static final IWeatherService readWeathersService = new WeatherServiceImpl();
 
 
     public void addLocation() {
@@ -41,7 +41,7 @@ public class ViewController {
 
     }
 
-    public static void displayWeathers() {
+    public  void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromBD();
 
@@ -58,6 +58,16 @@ public class ViewController {
 
     public void cleanFile() {
         locationService.cleanDBWithLocalModel();
+    }
+
+    public void locationSearch(){
+
+            String pattern = gui.enterString("Enter name or id Location with you looking ");
+
+        locationService.getLocationModelFromDbAfterIdOrName(pattern)
+                .forEach(list -> System.out.println(list == null ? " List is empty" : list));
+        System.out.println("");
+
     }
 
 
