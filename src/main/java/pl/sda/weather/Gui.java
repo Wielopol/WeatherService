@@ -50,18 +50,24 @@ public class Gui {
         do {
             System.out.println("Write city latitude : ");
             latitude = scanner.nextLine();
-            if (!validation.validationCoordinates(latitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (00.00) !!! ");
+            if(!validation.authenticationCoordinateInterval(-90,90,latitude)){
+                System.out.println("The coordinate range is incorrect");
             }
-        } while (!validation.validationCoordinates(latitude));
+            if (!validation.validationCoordinates(latitude)) {
+                System.out.println("Enter the name, this field cannot be empty format (00.00) and rang -90 to 90 !!! ");
+            }
+        } while (!validation.validationCoordinates(latitude) && !validation.authenticationCoordinateInterval(-90,90,latitude));
 
         do {
             System.out.println("Write city longitude : ");
             longitude = scanner.nextLine();
-            if (!validation.validationCoordinates(longitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (00.00) !!! ");
+            if(!validation.authenticationCoordinateInterval(-180,180,longitude)){
+                System.out.println("The coordinate range is incorrect");
             }
-        } while (!validation.validationCoordinates(longitude));
+            if (!validation.validationCoordinates(longitude)) {
+                System.out.println("Enter the name, this field cannot be empty format (00.00) !!! and rang -180 to 180");
+            }
+        } while (!validation.validationCoordinates(longitude) && !validation.authenticationCoordinateInterval(-180,180,longitude));
         String longitudeAndLatitude = "latitude: " + latitude + "; longitude: " + longitude;
 
 

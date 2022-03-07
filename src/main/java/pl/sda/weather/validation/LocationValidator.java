@@ -11,10 +11,20 @@ public class LocationValidator {
         return !name.isBlank() && n.find();
     }
 
+
+
     public boolean validationNames(String name) {
 
         Pattern namePackage = Pattern.compile("^[a-zA-Z]+\s?[a-zA-Z]+$");
         Matcher n = namePackage.matcher(name);
         return !name.isBlank() && n.find();
+    }
+
+    public boolean authenticationCoordinateInterval(
+            int lowestInterval, int highInterval, String value) {
+        double valueInt = Double.parseDouble(value);
+
+        return valueInt >= lowestInterval && valueInt <= highInterval;
+
     }
 }
