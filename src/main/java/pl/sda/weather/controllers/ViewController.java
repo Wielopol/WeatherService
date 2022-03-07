@@ -41,7 +41,7 @@ public class ViewController {
 
     }
 
-    public  void displayWeathers() {
+    public void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromBD();
 
@@ -60,16 +60,20 @@ public class ViewController {
         locationService.cleanDBWithLocalModel();
     }
 
-    public void locationSearch(){
+    public void locationSearch() {
 
-            String pattern = gui.enterString("Enter name or id Location with you looking ");
+        String pattern = gui.enterString("Enter name or id Location with you looking ");
 
-        locationService.getLocationModelFromDbAfterIdOrName(pattern)
-                .forEach(list -> System.out.println(list == null ? " List is empty" : list));
+        List<LocationModel> list = locationService.getLocationModelFromDbAfterIdOrName(pattern);
+
+        if(list.isEmpty()){
+            System.out.println("That location is not exist");
+        }
+        list.forEach(System.out::println);
+
         System.out.println("");
 
     }
-
 
 
 }
