@@ -1,5 +1,6 @@
 package pl.sda.weather.service.impl;
 
+import pl.sda.weather.Gui;
 import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryImpl;
 import pl.sda.weather.model.LocationModel;
@@ -12,6 +13,8 @@ import java.util.List;
 public class LocationServiceImpl implements ILocationService {
 
     ILocationRepository locationRepository = new LocationRepositoryImpl();
+
+    Gui gui = new Gui();
 
     @Override
     public void cleanDBWithLocalModel() {
@@ -44,17 +47,82 @@ public class LocationServiceImpl implements ILocationService {
         return result;
     }
 
+    List<LocationModel> newList = getLocationModelFromBD();
+
     @Override
-    public void editLocationModelCityName(String pattern, String newName){
-        List<LocationModel> newList = getLocationModelFromBD();
+    public void editLocationModel(String whatEdit, String pattern, String editData) {
+
+        if (whatEdit.equals("cityName")) {
+            editLocationModelCityName(pattern, editData);
+
+        }
+        if (whatEdit.equals("countryName")) {
+            editLocationModelCountryName(pattern, editData);
+
+        }
+        if (whatEdit.equals("regionName")) {
+
+            editLocationModelRegionName(pattern, editData);
+        }
+        if (whatEdit.equals("coordinates")){
+            editLocationModelCoordinates(pattern);
+
+        }
+    }
+
+
+    public void editLocationModelCityName(String pattern,String cityName) {
+
         cleanDBWithLocalModel();
 
         for (LocationModel locationModel : newList) {
             if (locationModel.getCityName().equals(pattern)) {
-                locationModel.setCityName(newName);
+                locationModel.setCityName(cityName);
             }
         }
-        for (LocationModel locationModelToBd : newList){
+        for (LocationModel locationModelToBd : newList) {
+            addLocationModelToDB(locationModelToBd);
+        }
+
+    }
+
+    public void editLocationModelCountryName(String pattern, String countryName) {
+        cleanDBWithLocalModel();
+
+        for (LocationModel locationModel : newList) {
+            if (locationModel.getCityName().equals(pattern)) {
+                locationModel.setCountryName(countryName);
+            }
+        }
+        for (LocationModel locationModelToBd : newList) {
+            addLocationModelToDB(locationModelToBd);
+        }
+
+    }
+
+    public void editLocationModelRegionName(String pattern, String regionName) {
+        cleanDBWithLocalModel();
+
+        for (LocationModel locationModel : newList) {
+            if (locationModel.getCityName().equals(pattern)) {
+                locationModel.setRegion(regionName);
+            }
+        }
+        for (LocationModel locationModelToBd : newList) {
+            addLocationModelToDB(locationModelToBd);
+        }
+
+    }
+
+    public void editLocationModelCoordinates(String pattern) {
+        cleanDBWithLocalModel();
+
+        for (LocationModel locationModel : newList) {
+            if (locationModel.getCityName().equals(pattern)) {
+                locationModel.setLongitudeAndLatitude(gui.setLongitudeAndLatitude());
+            }
+        }
+        for (LocationModel locationModelToBd : newList) {
             addLocationModelToDB(locationModelToBd);
         }
 

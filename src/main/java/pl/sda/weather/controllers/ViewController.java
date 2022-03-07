@@ -22,7 +22,7 @@ public class ViewController {
 
     public void addLocation() {
 
-        locationService.addLocationModelToDB(gui.getDataToLocalModelFromUser());
+        locationService.addLocationModelToDB(gui.getDataFromUserToCompleteLocationModel());
 
     }
 
@@ -66,7 +66,7 @@ public class ViewController {
 
         List<LocationModel> list = locationService.getLocationModelFromDbAfterIdOrName(pattern);
 
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println("That location is not exist");
         }
         list.forEach(System.out::println);
@@ -74,12 +74,18 @@ public class ViewController {
         System.out.println();
 
     }
-public void editLocationModelInDb(){
+
+    public void editLocationModelInDb(String whatsEdit) {
 
         String pattern = gui.enterString("Enter name city location to edit");
-        String newName = gui.enterString("Enter new city name");
+        String editData = gui.enterString("Enter new data ");
 
-        locationService.editLocationModelCityName(pattern, newName);
-}
+        locationService.editLocationModel(whatsEdit,pattern, editData);
+
+
+    }
+
+
+
 
 }

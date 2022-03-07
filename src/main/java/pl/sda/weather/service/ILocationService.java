@@ -16,5 +16,5 @@ public interface ILocationService {
 
     List<LocationModel> getLocationModelFromDbAfterIdOrName(String patternToSearch);
 
-    void editLocationModelCityName(String pattern, String newName);
+    void editLocationModel(String whatEdit, String pattern, String editData);
 }
