@@ -30,6 +30,9 @@ public class LocationRepositoryImpl implements ILocationRepository {
         }
     }
 
+
+
+
     @Override
     public List<LocationModel> getLocationModelDataFromDB() {
 

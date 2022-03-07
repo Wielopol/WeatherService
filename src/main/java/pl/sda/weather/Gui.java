@@ -27,6 +27,7 @@ public class Gui {
             System.out.println("[2]. Display of available locations");
             System.out.println("[3]. Downloading weather data");
             System.out.println("[4]. Display information about a specific location");
+            System.out.println("[5]. Edit location model list");
             System.out.println("[0]. Exit");
 
             choose1 = scanner.nextLine();
@@ -37,6 +38,7 @@ public class Gui {
                 case "2" -> LOCATION_CONTROLLER.displayLocation();
                 case "3" -> LOCATION_CONTROLLER.displayWeathers();
                 case "4" -> LOCATION_CONTROLLER.locationSearch();
+                case "5" -> LOCATION_CONTROLLER.editLocationModelInDb();
                 case "0" -> LOCATION_CONTROLLER.cleanFile();
                 default -> System.out.println("Wrong choice !!");
             }

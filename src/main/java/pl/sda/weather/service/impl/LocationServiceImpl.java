@@ -7,7 +7,6 @@ import pl.sda.weather.service.ILocationService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class LocationServiceImpl implements ILocationService {
@@ -43,6 +42,22 @@ public class LocationServiceImpl implements ILocationService {
             }
         }
         return result;
+    }
+
+    @Override
+    public void editLocationModelCityName(String pattern, String newName){
+        List<LocationModel> newList = getLocationModelFromBD();
+        cleanDBWithLocalModel();
+
+        for (LocationModel locationModel : newList) {
+            if (locationModel.getCityName().equals(pattern)) {
+                locationModel.setCityName(newName);
+            }
+        }
+        for (LocationModel locationModelToBd : newList){
+            addLocationModelToDB(locationModelToBd);
+        }
+
     }
 
 }

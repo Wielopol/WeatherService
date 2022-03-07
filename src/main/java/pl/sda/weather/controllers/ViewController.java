@@ -71,9 +71,15 @@ public class ViewController {
         }
         list.forEach(System.out::println);
 
-        System.out.println("");
+        System.out.println();
 
     }
+public void editLocationModelInDb(){
 
+        String pattern = gui.enterString("Enter name city location to edit");
+        String newName = gui.enterString("Enter new city name");
+
+        locationService.editLocationModelCityName(pattern, newName);
+}
 
 }
