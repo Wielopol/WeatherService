@@ -2,15 +2,16 @@ package pl.sda.weather.repository;
 
 
 import pl.sda.weather.model.LocationModel;
+import pl.sda.weather.model.entity.LocationModelEntity;
 
 import java.util.List;
 
 public interface ILocationRepository {
 
-    void addLocationModelToDB(LocationModel locationModel);
+    void saveLocation(LocationModelEntity locationModelEntity);
 
-    List<LocationModel> getLocationModelDataFromDB();
+    List<LocationModelEntity> getAllLocationModelData();
 
 
-    void cleanFile();
+    void delateAllRecords(LocationModelEntity locationModelEntity);
 }

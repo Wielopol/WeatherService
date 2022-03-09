@@ -13,13 +13,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LocationRepositoryImpl implements ILocationRepository {
+public class LocationRepositoryFileImpl {
 
     private static final String FILE_LOCATION_JSON = "src/main/resources/location/locations.json";
     Gson gson = new Gson();
 
-    @Override
-    public void addLocationModelToDB(LocationModel locationModel) {
+
+    public void saveLocation(LocationModel locationModel) {
 
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON),
@@ -32,9 +32,7 @@ public class LocationRepositoryImpl implements ILocationRepository {
 
 
 
-
-    @Override
-    public List<LocationModel> getLocationModelDataFromDB() {
+    public List<LocationModel> getAllLocationModelData() {
 
         try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
             return stream.map(s -> gson.fromJson(s, LocationModel.class)).toList();
@@ -46,8 +44,7 @@ public class LocationRepositoryImpl implements ILocationRepository {
     }
 
 
-    @Override
-    public void cleanFile() {
+    public void delateAllRecords() {
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON), "".getBytes());
         } catch (IOException e) {

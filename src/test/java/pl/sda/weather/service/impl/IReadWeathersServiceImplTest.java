@@ -68,7 +68,7 @@ class IReadWeathersServiceImplTest {
 
         List<Weather> result1 = null;
         try {
-            result1 = weatherService.listWeathers(citiesList);
+//            result1 = weatherService.listWeathers(citiesList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +102,7 @@ class IReadWeathersServiceImplTest {
 
         List<Weather> result2 = null;
         try {
-            result2 = weatherService.listWeathers(wrongCitiesList);
+//            result2 = weatherService.listWeathers(wrongCitiesList);
         } catch (Exception e) {
             e.printStackTrace();
         }

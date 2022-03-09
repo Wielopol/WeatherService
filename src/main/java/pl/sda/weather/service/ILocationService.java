@@ -1,20 +1,20 @@
 package pl.sda.weather.service;
 
 
-import pl.sda.weather.model.LocationModel;
+import pl.sda.weather.model.entity.LocationModelEntity;
 
 import java.util.List;
 
 public interface ILocationService {
 
 
-    void cleanDBWithLocalModel();
+    void cleanRecords();
 
-    void addLocationModelToDB(LocationModel locationModel);
+    void saveLocationModel(LocationModelEntity locationModelEntity);
 
-    List<LocationModel> getLocationModelFromBD();
+    List<LocationModelEntity> getAllLocation();
 
-    LocationModel getLocationModelFromDbAfterIdOrName(String patternToSearch);
+    LocationModelEntity getLocationByIdAndName(String patternToSearch);
 
-    void editLocationModel(String whatEdit, String pattern, String editData);
+    void editLocation(String whatEdit, String pattern, String editData);
 }

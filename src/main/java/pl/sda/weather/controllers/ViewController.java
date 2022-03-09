@@ -2,10 +2,10 @@ package pl.sda.weather.controllers;
 
 
 import pl.sda.weather.Gui;
-import pl.sda.weather.model.LocationModel;
+import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
-import pl.sda.weather.service.impl.LocationServiceImpl;
+import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class ViewController {
 
-    private static final ILocationService locationService = new LocationServiceImpl();
+    private static final ILocationService locationService = new LocationServiceDbImpl();
 
     private static final Gui gui = new Gui();
 
@@ -23,11 +23,11 @@ public class ViewController {
 
     public void addLocation() {
 
-        locationService.addLocationModelToDB(getDataFromUserToCompleteLocationModel());
+        locationService.saveLocationModel(getDataFromUserToCompleteLocationModel());
 
     }
 
-    public LocationModel getDataFromUserToCompleteLocationModel() {
+    public LocationModelEntity getDataFromUserToCompleteLocationModel() {
 
         String idUUID = String.valueOf(UUID.randomUUID());
         String longitudeAndLatitude = gui.getLongitudeAndLatitudeFromUser();
@@ -35,13 +35,13 @@ public class ViewController {
         String region = gui.getRegionFromUser();
         String countryName = gui.getCountryNameFromUser();
 
-        return new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName);
+        return new LocationModelEntity(idUUID, longitudeAndLatitude, cityName, region, countryName);
     }
 
 
     public void displayLocation() {
 
-        List<LocationModel> list = locationService.getLocationModelFromBD();
+        List<LocationModelEntity> list = locationService.getAllLocation();
 
         System.out.println("--------------------------------");
         System.out.println("List of Localization !!! ");
@@ -54,7 +54,7 @@ public class ViewController {
 
     public void displayWeathers() {
 
-        List<LocationModel> locationsList = locationService.getLocationModelFromBD();
+        List<LocationModelEntity> locationsList = locationService.getAllLocation();
 
         try {
             readWeathersService.listWeathers(locationsList)
@@ -67,14 +67,14 @@ public class ViewController {
     }
 
     public void cleanFile() {
-        locationService.cleanDBWithLocalModel();
+        locationService.cleanRecords();
     }
 
     public void locationSearch() {
 
         String pattern = gui.enterString("Enter name or id Location with you looking ");
 
-        LocationModel model = locationService.getLocationModelFromDbAfterIdOrName(pattern);
+        LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
 
         if (model == null) {
             System.out.println("That location does exist");
@@ -90,7 +90,7 @@ public class ViewController {
         String pattern = gui.enterString("Enter name city location to edit");
         String editData = gui.enterString("Enter new data ");
 
-        locationService.editLocationModel(whatsEdit,pattern, editData);
+        locationService.editLocation(whatsEdit,pattern, editData);
 
 
     }

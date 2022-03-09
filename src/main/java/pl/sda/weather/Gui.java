@@ -73,7 +73,7 @@ public class Gui {
             }
         } while (!validation.validationCoordinates(longitude) && !validation.authenticationCoordinateInterval(-180, 180, longitude));
 
-        return "latitude: " + latitude + "; longitude: " + longitude;
+        return "lat: " + latitude + "; long: " + longitude;
     }
 
     public String getCityNameFromUser() {
