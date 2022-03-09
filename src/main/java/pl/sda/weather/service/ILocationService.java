@@ -8,9 +8,13 @@ import java.util.List;
 public interface ILocationService {
 
 
-    void cleanFile();
+    void cleanDBWithLocalModel();
 
-    void addLocationModelJsonToDB(LocationModel locationModel);
+    void addLocationModelToDB(LocationModel locationModel);
 
-    List<LocationModel> getLocationModelFromFileJson();
+    List<LocationModel> getLocationModelFromBD();
+
+    LocationModel getLocationModelFromDbAfterIdOrName(String patternToSearch);
+
+    void editLocationModel(String whatEdit, String pattern, String editData);
 }

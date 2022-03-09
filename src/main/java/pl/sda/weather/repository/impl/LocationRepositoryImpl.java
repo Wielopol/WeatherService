@@ -9,39 +9,42 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LocationRepositoryImpl implements ILocationRepository {
 
     private static final String FILE_LOCATION_JSON = "src/main/resources/location/locations.json";
-
-
+    Gson gson = new Gson();
 
     @Override
-    public void addLocationModelJsonToDB(LocationModel locationModel){
-        Gson gson = new Gson();
+    public void addLocationModelToDB(LocationModel locationModel) {
+
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON),
-                    (gson.toJson(locationModel) + System.lineSeparator()) .getBytes(), StandardOpenOption.APPEND);
+                    (gson.toJson(locationModel) + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
 
         } catch (IOException e) {
             System.err.println("Unable to write the file.");
-
         }
     }
 
 
-    @Override
-    public List<LocationModel> getLocationModelFromFileJson() {
-        List<String[]> lines = getLinesFromFileJson();
 
-        return lines.stream()
-                .map(line -> new LocationModel(line[0], line[1], line[2], line[3], line[4]))
-                .collect(Collectors.toList());
+
+    @Override
+    public List<LocationModel> getLocationModelDataFromDB() {
+
+        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
+            return stream.map(s -> gson.fromJson(s, LocationModel.class)).toList();
+        } catch (IOException e) {
+            System.err.println("Unable to clear the file");
+        }
+        return Collections.emptyList();
+
     }
+
 
     @Override
     public void cleanFile() {
@@ -52,18 +55,5 @@ public class LocationRepositoryImpl implements ILocationRepository {
         }
     }
 
-
-
-    public List<String[]> getLinesFromFileJson() {
-       List<String[]> lines = new ArrayList<>();
-        try (Stream<String> stream = Files.lines(Paths.get(FILE_LOCATION_JSON))) {
-            lines = stream
-                    .map(line -> line.split(","))
-                    .collect(Collectors.toList());
-        } catch (IOException  e) {
-            System.err.println("Unable to read the file.");
-        }
-        return lines;
-    }
 
 }

@@ -66,10 +66,10 @@ public class LocationModel {
 
     @Override
     public String toString() {
-        return  id + ","
-                + longitudeAndLatitude + ","
-                + cityName + ","
-                + region + ","
+        return  id + ", "
+                + longitudeAndLatitude + ", "
+                + cityName + ", "
+                + region + ", "
                 + countryName;
 
     }
