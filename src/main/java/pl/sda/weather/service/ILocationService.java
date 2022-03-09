@@ -14,7 +14,7 @@ public interface ILocationService {
 
     List<LocationModel> getLocationModelFromBD();
 
-    List<LocationModel> getLocationModelFromDbAfterIdOrName(String patternToSearch);
+    LocationModel getLocationModelFromDbAfterIdOrName(String patternToSearch);
 
     void editLocationModel(String whatEdit, String pattern, String editData);
 }

@@ -46,7 +46,7 @@ public class Gui {
 
     }
 
-    public String setLongitudeAndLatitude() {
+    public String getLongitudeAndLatitudeFromUser() {
 
         String longitude;
         String latitude;
@@ -58,7 +58,7 @@ public class Gui {
                 System.out.println("The coordinate range is incorrect");
             }
             if (!validation.validationCoordinates(latitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (00.00) and rang -90 to 90 !!! ");
+                System.out.println("Enter the name, this field cannot be empty format (00.000) and rang -90 to 90 !!! ");
             }
         } while (!validation.validationCoordinates(latitude) && !validation.authenticationCoordinateInterval(-90, 90, latitude));
 
@@ -69,14 +69,14 @@ public class Gui {
                 System.out.println("The coordinate range is incorrect");
             }
             if (!validation.validationCoordinates(longitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (00.00) !!! and rang -180 to 180");
+                System.out.println("Enter the name, this field cannot be empty format (000.000) !!! and rang -180 to 180");
             }
         } while (!validation.validationCoordinates(longitude) && !validation.authenticationCoordinateInterval(-180, 180, longitude));
 
         return "latitude: " + latitude + "; longitude: " + longitude;
     }
 
-    public String setCityName() {
+    public String getCityNameFromUser() {
 
         String cityName;
         do {
@@ -91,7 +91,7 @@ public class Gui {
 
     }
 
-    public String setRegion() {
+    public String getRegionFromUser() {
         System.out.println("Write region : ");
         String region = scanner.nextLine();
         if (region.equals("")) {
@@ -100,7 +100,7 @@ public class Gui {
         return region;
     }
 
-    public String setCountryName() {
+    public String getCountryNameFromUser() {
         String countryName;
         do {
             System.out.println("Write country name :");
@@ -111,22 +111,6 @@ public class Gui {
 
         } while (!validation.validationNames(countryName));
         return countryName;
-    }
-
-
-    public LocationModel getDataFromUserToCompleteLocationModel() {
-
-        String idUUID = String.valueOf(UUID.randomUUID());
-
-        String longitudeAndLatitude = setLongitudeAndLatitude();
-
-        String cityName = setCityName();
-
-        String region = setRegion();
-
-        String countryName = setCountryName();
-
-        return new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName);
     }
 
     public static void edit() {

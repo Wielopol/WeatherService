@@ -35,13 +35,13 @@ public class LocationServiceImpl implements ILocationService {
     }
 
     @Override
-    public List<LocationModel> getLocationModelFromDbAfterIdOrName(String patternToSearch) {
+    public LocationModel getLocationModelFromDbAfterIdOrName(String patternToSearch) {
         List<LocationModel> locationModelList = getLocationModelFromBD();
-        List<LocationModel> result = new ArrayList<>();
+        LocationModel result = null;
 
         for (LocationModel locationModel : locationModelList) {
             if (locationModel.getCityName().equals(patternToSearch) || locationModel.getId().equals(patternToSearch)) {
-                result.add(locationModel);
+                result = locationModel;
             }
         }
         return result;
@@ -119,7 +119,7 @@ public class LocationServiceImpl implements ILocationService {
 
         for (LocationModel locationModel : newList) {
             if (locationModel.getCityName().equals(pattern)) {
-                locationModel.setLongitudeAndLatitude(gui.setLongitudeAndLatitude());
+                locationModel.setLongitudeAndLatitude(gui.getLongitudeAndLatitudeFromUser());
             }
         }
         for (LocationModel locationModelToBd : newList) {

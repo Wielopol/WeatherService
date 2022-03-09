@@ -10,6 +10,7 @@ import pl.sda.weather.service.impl.LocationServiceImpl;
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ViewController {
 
@@ -22,8 +23,19 @@ public class ViewController {
 
     public void addLocation() {
 
-        locationService.addLocationModelToDB(gui.getDataFromUserToCompleteLocationModel());
+        locationService.addLocationModelToDB(getDataFromUserToCompleteLocationModel());
 
+    }
+
+    public LocationModel getDataFromUserToCompleteLocationModel() {
+
+        String idUUID = String.valueOf(UUID.randomUUID());
+        String longitudeAndLatitude = gui.getLongitudeAndLatitudeFromUser();
+        String cityName = gui.getCityNameFromUser();
+        String region = gui.getRegionFromUser();
+        String countryName = gui.getCountryNameFromUser();
+
+        return new LocationModel(idUUID, longitudeAndLatitude, cityName, region, countryName);
     }
 
 
@@ -34,8 +46,7 @@ public class ViewController {
         System.out.println("--------------------------------");
         System.out.println("List of Localization !!! ");
         System.out.println("--------------------------------");
-        list
-                .forEach(System.out::println);
+        list.forEach(System.out::println);
         System.out.println("--------------------------------");
 
 
@@ -44,7 +55,6 @@ public class ViewController {
     public void displayWeathers() {
 
         List<LocationModel> locationsList = locationService.getLocationModelFromBD();
-
 
         try {
             readWeathersService.listWeathers(locationsList)
@@ -64,12 +74,12 @@ public class ViewController {
 
         String pattern = gui.enterString("Enter name or id Location with you looking ");
 
-        List<LocationModel> list = locationService.getLocationModelFromDbAfterIdOrName(pattern);
+        LocationModel model = locationService.getLocationModelFromDbAfterIdOrName(pattern);
 
-        if (list.isEmpty()) {
-            System.out.println("That location is not exist");
+        if (model == null) {
+            System.out.println("That location does exist");
         }
-        list.forEach(System.out::println);
+        System.out.println(model);
 
         System.out.println();
 
