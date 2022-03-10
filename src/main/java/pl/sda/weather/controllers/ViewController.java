@@ -23,9 +23,15 @@ public class ViewController {
 
     public void addLocation() {
 
-        locationService.saveLocationModel(getDataFromUserToCompleteLocationModel());
+        LocationModelEntity model = getDataFromUserToCompleteLocationModel();
 
+        if(locationService.isLocationExiest(model)){
+            System.out.println("This location already exists");
+        }else {
+            locationService.saveLocationModel(model);
+        }
     }
+
 
     public LocationModelEntity getDataFromUserToCompleteLocationModel() {
 
@@ -70,9 +76,16 @@ public class ViewController {
         locationService.cleanRecords();
     }
 
+    public void delateOneLocation(){
+
+        String pattern = gui.enterString("Enter name or id location with you looking ");
+
+        locationService.delateLocationOnList(pattern);
+    }
+
     public void locationSearch() {
 
-        String pattern = gui.enterString("Enter name or id Location with you looking ");
+        String pattern = gui.enterString("Enter name or id location with you looking ");
 
         LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
 
@@ -85,10 +98,8 @@ public class ViewController {
 
     }
 
-    public void editLocationModelInDb(String whatsEdit) {
+    public void editLocationModelInDb(String whatsEdit, String pattern, String editData) {
 
-        String pattern = gui.enterString("Enter name city location to edit");
-        String editData = gui.enterString("Enter new data ");
 
         locationService.editLocation(whatsEdit,pattern, editData);
 

@@ -1,5 +1,6 @@
 package pl.sda.weather.service.impl;
 
+import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
@@ -11,14 +12,34 @@ public class LocationServiceDbImpl implements ILocationService {
 
     ILocationRepository locationRepository = new LocationRepositoryDbImpl();
 
+
+    @Override
+    public boolean isLocationExiest(LocationModelEntity model) {
+        List<LocationModelEntity> list = locationRepository.getAllLocationModelData();
+        for (LocationModelEntity location : list) {
+            if (location.getLongitudeAndLatitude().equals(model.getLongitudeAndLatitude()) || location.getCityName().equals(model.getCityName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void cleanRecords() {
         List<LocationModelEntity> list = locationRepository.getAllLocationModelData();
-
-        for (LocationModelEntity location : list){
-            this.locationRepository.delateAllRecords(location);
+        for (LocationModelEntity location : list) {
+            this.locationRepository.delateRecord(location);
         }
+    }
 
+    @Override
+    public void delateLocationOnList(String pattern) {
+        List<LocationModelEntity> list = locationRepository.getAllLocationModelData();
+        for (LocationModelEntity location : list) {
+            if (location.getCityName().equals(pattern) || location.getId().equals(pattern)) {
+                this.locationRepository.delateRecord(location);
+            }
+        }
 
 
     }
@@ -38,11 +59,11 @@ public class LocationServiceDbImpl implements ILocationService {
     @Override
     public LocationModelEntity getLocationByIdAndName(String patternToSearch) {
 
-        List<LocationModelEntity> locationModelList = getAllLocation();
+        List<LocationModelEntity> list = getAllLocation();
 
         LocationModelEntity result = null;
 
-        for (LocationModelEntity locationModel : locationModelList) {
+        for (LocationModelEntity locationModel : list) {
             if (locationModel.getCityName().equals(patternToSearch) || locationModel.getId().equals(patternToSearch)) {
                 result = locationModel;
             }
@@ -54,5 +75,26 @@ public class LocationServiceDbImpl implements ILocationService {
     @Override
     public void editLocation(String whatEdit, String pattern, String editData) {
 
+        LocationModelEntity location = getLocationByIdAndName(pattern);
+
+        if (whatEdit.equals("cityName")) {
+            location.setCityName(editData);
+
+        }
+        if (whatEdit.equals("countryName")) {
+            location.setCountryName(editData);
+
+        }
+        if (whatEdit.equals("regionName")) {
+
+            location.setRegion(editData);
+        }
+        if (whatEdit.equals("coordinates")) {
+            location.setLongitudeAndLatitude(editData);
+        }
+
+        locationRepository.editLocation(location);
     }
+
+
 }

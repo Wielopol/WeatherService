@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface ILocationService {
 
+    boolean isLocationExiest(LocationModelEntity model);
 
     void cleanRecords();
+
+    void delateLocationOnList(String pattern);
 
     void saveLocationModel(LocationModelEntity locationModelEntity);
 

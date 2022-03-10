@@ -2,7 +2,6 @@ package pl.sda.weather.repository.impl;
 
 
 import com.google.gson.Gson;
-import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.model.LocationModel;
 
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class LocationRepositoryFileImpl {
     }
 
 
-    public void delateAllRecords() {
+    public void delateAllRecordsInFile() {
         try {
             Files.write(Paths.get(FILE_LOCATION_JSON), "".getBytes());
         } catch (IOException e) {

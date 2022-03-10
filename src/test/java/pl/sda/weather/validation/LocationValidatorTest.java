@@ -44,7 +44,7 @@ class LocationValidatorTest {
         //give
         String wrong = "00";
         //when
-        boolean result = locationValidator.validationCoordinates(wrong);
+        boolean result = locationValidator.validationLongitude(wrong);
         //then
         assertThat(result).isFalse();
     }
@@ -54,7 +54,7 @@ class LocationValidatorTest {
         //give
         String wrong = "00,3";
         //when
-        boolean result = locationValidator.validationCoordinates(wrong);
+        boolean result = locationValidator.validationLatitude(wrong);
         //then
         assertThat(result).isFalse();
     }
@@ -64,7 +64,7 @@ class LocationValidatorTest {
         //give
         String wrong = "11.3";
         //when
-        boolean result = locationValidator.validationCoordinates(wrong);
+        boolean result = locationValidator.validationLatitude(wrong);
         //then
         assertThat(result).isTrue();
     }

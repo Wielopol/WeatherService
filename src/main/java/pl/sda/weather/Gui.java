@@ -2,11 +2,9 @@ package pl.sda.weather;
 
 
 import pl.sda.weather.controllers.ViewController;
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.validation.LocationValidator;
 
 import java.util.Scanner;
-import java.util.UUID;
 
 
 public class Gui {
@@ -26,7 +24,8 @@ public class Gui {
             System.out.println("[2]. Display of available locations");
             System.out.println("[3]. Downloading weather data");
             System.out.println("[4]. Display information about a specific location");
-            System.out.println("[5]. Edit location model list");
+            System.out.println("[5]. Edit location");
+            System.out.println("[6]. Clear location");
             System.out.println("[0]. Exit");
 
             choose1 = scanner.nextLine();
@@ -38,6 +37,7 @@ public class Gui {
                 case "3" -> LOCATION_CONTROLLER.displayWeathers();
                 case "4" -> LOCATION_CONTROLLER.locationSearch();
                 case "5" -> edit();
+                case "6" -> clear();
                 case "0" -> LOCATION_CONTROLLER.cleanFile();
                 default -> System.out.println("Wrong choice !!");
             }
@@ -46,7 +46,7 @@ public class Gui {
 
     }
 
-    public String getLongitudeAndLatitudeFromUser() {
+    public static String getLongitudeAndLatitudeFromUser() {
 
         String longitude;
         String latitude;
@@ -54,29 +54,25 @@ public class Gui {
         do {
             System.out.println("Write city latitude : ");
             latitude = scanner.nextLine();
-            if (!validation.authenticationCoordinateInterval(-90, 90, latitude)) {
-                System.out.println("The coordinate range is incorrect");
-            }
-            if (!validation.validationCoordinates(latitude)) {
+
+            if (!validation.validationLatitude(latitude)) {
                 System.out.println("Enter the name, this field cannot be empty format (00.000) and rang -90 to 90 !!! ");
             }
-        } while (!validation.validationCoordinates(latitude) && !validation.authenticationCoordinateInterval(-90, 90, latitude));
+        } while (!validation.validationLatitude(latitude));
 
         do {
             System.out.println("Write city longitude : ");
             longitude = scanner.nextLine();
-            if (!validation.authenticationCoordinateInterval(-180, 180, longitude)) {
-                System.out.println("The coordinate range is incorrect");
-            }
-            if (!validation.validationCoordinates(longitude)) {
+
+            if (!validation.validationLongitude(longitude)) {
                 System.out.println("Enter the name, this field cannot be empty format (000.000) !!! and rang -180 to 180");
             }
-        } while (!validation.validationCoordinates(longitude) && !validation.authenticationCoordinateInterval(-180, 180, longitude));
+        } while (!validation.validationLongitude(longitude));
 
-        return "lat: " + latitude + "; long: " + longitude;
+        return latitude + "," + longitude;
     }
 
-    public String getCityNameFromUser() {
+    public static String getCityNameFromUser() {
 
         String cityName;
         do {
@@ -91,7 +87,7 @@ public class Gui {
 
     }
 
-    public String getRegionFromUser() {
+    public static String getRegionFromUser() {
         System.out.println("Write region : ");
         String region = scanner.nextLine();
         if (region.equals("")) {
@@ -100,7 +96,7 @@ public class Gui {
         return region;
     }
 
-    public String getCountryNameFromUser() {
+    public static String getCountryNameFromUser() {
         String countryName;
         do {
             System.out.println("Write country name :");
@@ -126,19 +122,42 @@ public class Gui {
             choose1 = scanner.nextLine();
 
             switch (choose1) {
-                case "1" -> LOCATION_CONTROLLER.editLocationModelInDb("cityName");
-                case "2" -> LOCATION_CONTROLLER.editLocationModelInDb("regionName");
-                case "3" -> LOCATION_CONTROLLER.editLocationModelInDb("countryName");
-                case "4" -> LOCATION_CONTROLLER.editLocationModelInDb("coordinates");
+                case "1" -> LOCATION_CONTROLLER.editLocationModelInDb("cityName",pattern(), getCityNameFromUser());
+                case "2" -> LOCATION_CONTROLLER.editLocationModelInDb("regionName",pattern(), getRegionFromUser());
+                case "3" -> LOCATION_CONTROLLER.editLocationModelInDb("countryName",pattern(), getCountryNameFromUser());
+                case "4" -> LOCATION_CONTROLLER.editLocationModelInDb("coordinates",pattern(), getLongitudeAndLatitudeFromUser());
                 case "0" -> showMainMenu();
                 default -> System.out.println("Wrong choice !!");
             }
         } while (!choose1.equals("0"));
     }
 
-    public String enterString(String info) {
+    public static void clear() {
+
+        String choose1;
+        do {
+            System.out.println("[1]. Clear all location ");
+            System.out.println("[2]. Delate one location ");
+            System.out.println("[0]. Back");
+
+            choose1 = scanner.nextLine();
+
+            switch (choose1) {
+                case "1" -> LOCATION_CONTROLLER.cleanFile();
+                case "2" -> LOCATION_CONTROLLER.delateOneLocation();
+                case "0" -> showMainMenu();
+                default -> System.out.println("Wrong choice !!");
+            }
+        } while (!choose1.equals("0"));
+    }
+
+    public static String enterString(String info) {
         System.out.println(info);
         return scanner.nextLine();
+    }
+
+    public static String pattern(){
+        return enterString("Enter name city or location to edit");
     }
 
 

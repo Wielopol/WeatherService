@@ -13,7 +13,6 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            // Tworzy obiekt SessionFactory na podstawie konfiguracji z pliku hibernate.cfg.xml
             return new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             logger.error("Initial SessionFactory creation failed.", ex);
@@ -26,7 +25,6 @@ public class HibernateUtil {
     }
 
     public static void shutdown() {
-        // Zamykanie cache i connection pool
         getSessionFactory().close();
     }
 }
