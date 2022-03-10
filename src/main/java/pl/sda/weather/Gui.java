@@ -58,7 +58,8 @@ public class Gui {
             if (!validation.validationLatitude(latitude)) {
                 System.out.println("Enter the name, this field cannot be empty format (00.000) and rang -90 to 90 !!! ");
             }
-        } while (!validation.validationLatitude(latitude));
+
+        } while (!validation.validationLatitude(latitude) );
 
         do {
             System.out.println("Write city longitude : ");

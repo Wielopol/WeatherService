@@ -25,6 +25,8 @@ class ILocationServiceTest {
     void getLocationModelFromDbAfterIdOrName() {
     }
 
+
+
     @Test
     void saveLocationModel(){
         //give
@@ -37,6 +39,8 @@ class ILocationServiceTest {
     @Test
     void saveLocation() {
 
+
+
         LocationModelEntity location1 = new LocationModelEntity(String.valueOf(UUID.randomUUID()),"59.436,24.753","Tallinn","Telliskivi","Estonia");
         LocationModelEntity location2 = new LocationModelEntity(String.valueOf(UUID.randomUUID()),"48.398,9.991","Ulm","Magirus","Germany");
         LocationModelEntity location3 = new LocationModelEntity(String.valueOf(UUID.randomUUID()),"48.208,16.372","Wieden","Taborstraße","Austria");
@@ -48,6 +52,7 @@ class ILocationServiceTest {
         locationService.saveLocationModel(location3);
         locationService.saveLocationModel(location4);
         locationService.saveLocationModel(location5);
+
 
     }
 

@@ -16,7 +16,6 @@ public class ViewController {
 
     private static final ILocationService locationService = new LocationServiceDbImpl();
 
-    private static final Gui gui = new Gui();
 
     private static final IWeatherService readWeathersService = new WeatherServiceImpl();
 
@@ -36,10 +35,10 @@ public class ViewController {
     public LocationModelEntity getDataFromUserToCompleteLocationModel() {
 
         String idUUID = String.valueOf(UUID.randomUUID());
-        String longitudeAndLatitude = gui.getLongitudeAndLatitudeFromUser();
-        String cityName = gui.getCityNameFromUser();
-        String region = gui.getRegionFromUser();
-        String countryName = gui.getCountryNameFromUser();
+        String longitudeAndLatitude = Gui.getLongitudeAndLatitudeFromUser();
+        String cityName = Gui.getCityNameFromUser();
+        String region = Gui.getRegionFromUser();
+        String countryName = Gui.getCountryNameFromUser();
 
         return new LocationModelEntity(idUUID, longitudeAndLatitude, cityName, region, countryName);
     }
@@ -78,14 +77,14 @@ public class ViewController {
 
     public void delateOneLocation(){
 
-        String pattern = gui.enterString("Enter name or id location with you looking ");
+        String pattern = Gui.enterString("Enter name or id location with you looking ");
 
         locationService.delateLocationOnList(pattern);
     }
 
     public void locationSearch() {
 
-        String pattern = gui.enterString("Enter name or id location with you looking ");
+        String pattern = Gui.enterString("Enter name or id location with you looking ");
 
         LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
 

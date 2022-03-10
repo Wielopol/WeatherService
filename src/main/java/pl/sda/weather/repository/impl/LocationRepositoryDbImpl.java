@@ -31,10 +31,10 @@ public class LocationRepositoryDbImpl implements ILocationRepository {
                 transaction.rollback();
 
             logger.error(e.getMessage(), e);
+        }
+
+
     }
-
-
-}
 
     @Override
     public void editLocation(LocationModelEntity locationModelEntity) {
@@ -78,6 +78,33 @@ public class LocationRepositoryDbImpl implements ILocationRepository {
         return Collections.emptyList();
 
     }
+
+    @Override
+    public LocationModelEntity getAllLocationModelDataByCityNameOrId(String pattern) {
+
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            LocationModelEntity model = (LocationModelEntity) session.createQuery("FROM LocationModelEntity l WHERE l.cityName = :cityName or l.id =:id")
+                    .setParameter("cityName", pattern)
+                    .setParameter("id", pattern)
+                    .getSingleResult();
+
+            transaction.commit();
+            return model;
+
+        } catch (HibernateException e) {
+            if (transaction != null)
+                transaction.rollback();
+
+            logger.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+
 
     @Override
     public void delateRecord(LocationModelEntity locationModelEntity) {

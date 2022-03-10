@@ -19,5 +19,6 @@ public interface ILocationService {
 
     LocationModelEntity getLocationByIdAndName(String patternToSearch);
 
+
     void editLocation(String whatEdit, String pattern, String editData);
 }

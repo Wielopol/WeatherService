@@ -14,5 +14,8 @@ public interface ILocationRepository {
     List<LocationModelEntity> getAllLocationModelData();
 
 
+
+    LocationModelEntity getAllLocationModelDataByCityNameOrId(String pattern);
+
     void delateRecord(LocationModelEntity locationModelEntity);
 }

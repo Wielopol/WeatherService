@@ -72,10 +72,10 @@ class LocationValidatorTest {
     @Test
     void whenEnterToLoweCoordination(){
         //give
-        String value = "-190.3";
+        double value = -190.3;
         //when
         boolean result = locationValidator
-                .authenticationCoordinateInterval(-180,180,value);
+                .authenticationCoordinateInterval(-180,180, value);
         //then
         assertThat(result).isFalse();
     }
@@ -83,7 +83,7 @@ class LocationValidatorTest {
     @Test
     void whenEnterToHighCoordination(){
         //give
-        String value = "101.3";
+        double value = 101.3;
         //when
         boolean result = locationValidator
                 .authenticationCoordinateInterval(-90,90,value);
@@ -93,7 +93,7 @@ class LocationValidatorTest {
     @Test
     void whenEnterCoordinationInRang(){
         //give
-        String value = "11.3";
+        double value = 11.3;
         //when
         boolean result = locationValidator.authenticationCoordinateInterval(-180,180,value);
         //then
@@ -102,7 +102,7 @@ class LocationValidatorTest {
     @Test
     void whenEnterCoordinationInRangButOnEdge(){
         //give
-        String value = "90.00";
+        double value = 90.00;
         //when
         boolean result = locationValidator.authenticationCoordinateInterval(-90,90,value);
         //then

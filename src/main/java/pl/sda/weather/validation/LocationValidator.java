@@ -8,13 +8,25 @@ public class LocationValidator {
     public boolean validationLatitude(String name) {
         Pattern recipientPackage = Pattern.compile("^-?[0-9]{1,3}\\.[0-9]{1,5}$");
         Matcher n = recipientPackage.matcher(name);
-        boolean rang = authenticationCoordinateInterval(-90, 90, name);
+        double valueInt = 0;
+        try {
+            valueInt = Double.parseDouble(name);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+        boolean rang = authenticationCoordinateInterval(-90, 90, valueInt);
         return !name.isBlank() && n.find() && rang;
     }
     public boolean validationLongitude(String name) {
         Pattern recipientPackage = Pattern.compile("^-?[0-9]{1,3}\\.[0-9]{1,5}$");
         Matcher n = recipientPackage.matcher(name);
-        boolean rang = authenticationCoordinateInterval(-180, 180, name);
+        double valueInt = 0;
+        try {
+            valueInt = Double.parseDouble(name);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+        boolean rang = authenticationCoordinateInterval(-180, 180, valueInt);
         return !name.isBlank() && n.find() && rang;
     }
 
@@ -27,9 +39,7 @@ public class LocationValidator {
     }
 
     public boolean authenticationCoordinateInterval(
-            int lowestInterval, int highInterval, String value) {
-        double valueInt = Double.parseDouble(value);
-
+            int lowestInterval, int highInterval, double valueInt) {
         return valueInt >= lowestInterval && valueInt <= highInterval;
 
     }

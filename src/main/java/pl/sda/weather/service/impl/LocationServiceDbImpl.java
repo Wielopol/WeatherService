@@ -1,6 +1,5 @@
 package pl.sda.weather.service.impl;
 
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
@@ -59,16 +58,7 @@ public class LocationServiceDbImpl implements ILocationService {
     @Override
     public LocationModelEntity getLocationByIdAndName(String patternToSearch) {
 
-        List<LocationModelEntity> list = getAllLocation();
-
-        LocationModelEntity result = null;
-
-        for (LocationModelEntity locationModel : list) {
-            if (locationModel.getCityName().equals(patternToSearch) || locationModel.getId().equals(patternToSearch)) {
-                result = locationModel;
-            }
-        }
-        return result;
+        return this.locationRepository.getAllLocationModelDataByCityNameOrId(patternToSearch);
 
     }
 
@@ -77,23 +67,26 @@ public class LocationServiceDbImpl implements ILocationService {
 
         LocationModelEntity location = getLocationByIdAndName(pattern);
 
-        if (whatEdit.equals("cityName")) {
-            location.setCityName(editData);
+        if(location != null) {
+            if (whatEdit.equals("cityName")) {
+                location.setCityName(editData);
 
-        }
-        if (whatEdit.equals("countryName")) {
-            location.setCountryName(editData);
+            }
+            if (whatEdit.equals("countryName")) {
+                location.setCountryName(editData);
 
-        }
-        if (whatEdit.equals("regionName")) {
+            }
+            if (whatEdit.equals("regionName")) {
 
-            location.setRegion(editData);
-        }
-        if (whatEdit.equals("coordinates")) {
-            location.setLongitudeAndLatitude(editData);
-        }
+                location.setRegion(editData);
+            }
+            if (whatEdit.equals("coordinates")) {
+                location.setLongitudeAndLatitude(editData);
+            }
 
-        locationRepository.editLocation(location);
+            locationRepository.editLocation(location);
+        }
+        System.out.println("Wrong location");
     }
 
 
