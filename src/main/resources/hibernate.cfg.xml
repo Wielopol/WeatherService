@@ -16,15 +16,15 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:postgresql://localhost:5432/weatherService2
+            jdbc:postgresql://localhost:5432/weatherService
         </property>
 
         <property name="hibernate.connection.username">
-            kamil
+            postgres
         </property>
 
         <property name="hibernate.connection.password">
-            kamil
+            hellopostgres
         </property>
 
         <!--
@@ -32,7 +32,7 @@
             To bardzo ważna opcja. Należy pamiętać żeby weryfikować czy zapytanie, które jest generowane
             odpowiada naszym potrzebom.
         -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
 
         <property name="format_sql">true</property>
 
@@ -63,6 +63,7 @@
 <!--        <mapping resource="mappings/Genre.hbm.xml"></mapping>-->
 
         <mapping class="pl.sda.weather.model.entity.LocationModelEntity"/>
+        <mapping class="pl.sda.weather.model.entity.WeatherModelEntity"/>
 <!--        <mapping class="com.sda.hibernate.commons.entity.Genre"/>-->
 <!--        <mapping class="com.sda.hibernate.commons.entity.Movie"/>-->
 <!--        <mapping class="com.sda.hibernate.commons.entity.Person"/>-->

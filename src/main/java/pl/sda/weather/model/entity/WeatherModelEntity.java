@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class WeatherModelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "weathers_generator")
-    @SequenceGenerator(name = "weathers_generator", sequenceName = "weathers_weather_id_seq")
+    @SequenceGenerator(name = "weathers_generator", sequenceName = "weathers_weather_id_seq", allocationSize = 1)
     @Column(name = "weather_id")
     private Integer id;
 
@@ -29,8 +30,10 @@ public class WeatherModelEntity {
     private Float windDir;
     @Column(name = "windSpeed", nullable = false)
     private Float windSpeed;
+    @Column(name = "date", nullable = false)
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
-    private String city_id;
+    private LocationModelEntity location;
 }

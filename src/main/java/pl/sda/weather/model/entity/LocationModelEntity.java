@@ -18,7 +18,7 @@ public class LocationModelEntity {
 
     @Id
     @Column(name = "location_id")
-    private String id;
+    private String location_id;
 
     @Column(name = "longitude_and_latitude", nullable = false)
     private String longitudeAndLatitude;

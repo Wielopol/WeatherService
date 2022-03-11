@@ -1,8 +1,12 @@
 package pl.sda.weather.service.impl;
 
+import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.entity.LocationModelEntity;
+import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
+import pl.sda.weather.repository.IWeatherRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
+import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.ILocationService;
 
 import java.util.List;
@@ -18,9 +22,6 @@ public class LocationServiceDbImpl implements ILocationService {
         for (LocationModelEntity location : list){
             this.locationRepository.delateAllRecords(location);
         }
-
-
-
     }
 
     @Override
@@ -43,7 +44,7 @@ public class LocationServiceDbImpl implements ILocationService {
         LocationModelEntity result = null;
 
         for (LocationModelEntity locationModel : locationModelList) {
-            if (locationModel.getCityName().equals(patternToSearch) || locationModel.getId().equals(patternToSearch)) {
+            if (locationModel.getCityName().equals(patternToSearch) || locationModel.getLocation_id().equals(patternToSearch)) {
                 result = locationModel;
             }
         }

@@ -2,11 +2,15 @@ package pl.sda.weather.service;
 
 import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.entity.LocationModelEntity;
+import pl.sda.weather.model.entity.WeatherModelEntity;
 
 import java.util.List;
 
 public interface IWeatherService {
 
-    List<Weather> listWeathers(List<LocationModelEntity> citiesList) throws Exception;
+    void listWeathers(List<LocationModelEntity> citiesList) throws Exception;
 
+    void cleanRecords();
+
+    List<WeatherModelEntity> getAllLocation();
 }
