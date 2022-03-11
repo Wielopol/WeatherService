@@ -16,7 +16,7 @@ public class LocationServiceDbImpl implements ILocationService {
     public boolean isLocationExiest(LocationModelEntity model) {
         List<LocationModelEntity> list = locationRepository.getAllLocationModelData();
         for (LocationModelEntity location : list) {
-            if (location.getLongitudeAndLatitude().equals(model.getLongitudeAndLatitude()) || location.getCityName().equals(model.getCityName())) {
+            if (location.getLatitudeAndLongitude().equals(model.getLatitudeAndLongitude()) || location.getCityName().equals(model.getCityName())) {
                 return true;
             }
         }
@@ -78,7 +78,7 @@ public class LocationServiceDbImpl implements ILocationService {
                 location.setRegion(editData);
             }
             if (whatEdit.equals("coordinates")) {
-                location.setLongitudeAndLatitude(editData);
+                location.setLatitudeAndLongitude(editData);
             }
 
             locationRepository.editLocation(location);
