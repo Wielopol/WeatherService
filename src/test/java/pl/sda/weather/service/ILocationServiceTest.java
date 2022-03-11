@@ -17,25 +17,13 @@ class ILocationServiceTest {
 
     ILocationService locationService = new LocationServiceDbImpl();
 
-    @Test
-    void getLocationModelFromBD() {
-    }
-
-    @Test
-    void getLocationModelFromDbAfterIdOrName() {
-    }
-
-
-
-    @Test
-    void saveLocationModel(){
         //give
 
         //when
 
         //then
 
-    }
+
     @Test
     void saveLocation() {
 

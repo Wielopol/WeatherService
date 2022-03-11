@@ -33,12 +33,9 @@ public class LocationServiceDbImpl implements ILocationService {
 
     @Override
     public void delateLocationOnList(String pattern) {
-        List<LocationModelEntity> list = locationRepository.getAllLocationModelData();
-        for (LocationModelEntity location : list) {
-            if (location.getCityName().equals(pattern) || location.getId().equals(pattern)) {
-                this.locationRepository.delateRecord(location);
-            }
-        }
+
+        LocationModelEntity location = getLocationByIdAndName(pattern);
+        this.locationRepository.delateRecord(location);
 
 
     }

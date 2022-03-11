@@ -19,7 +19,6 @@ public class LocationRepositoryDbImpl implements ILocationRepository {
     @Override
     public void saveLocation(LocationModelEntity locationModelEntity) {
 
-
         Transaction transaction = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -29,11 +28,8 @@ public class LocationRepositoryDbImpl implements ILocationRepository {
         } catch (HibernateException e) {
             if (transaction != null)
                 transaction.rollback();
-
             logger.error(e.getMessage(), e);
         }
-
-
     }
 
     @Override

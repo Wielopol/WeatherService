@@ -1,7 +1,10 @@
 package pl.sda.weather.controllers;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.sda.weather.Gui;
+import pl.sda.weather.connection.HibernateUtil;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
@@ -15,6 +18,8 @@ import java.util.UUID;
 public class ViewController {
 
     private static final ILocationService locationService = new LocationServiceDbImpl();
+
+    private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
 
     private static final IWeatherService readWeathersService = new WeatherServiceImpl();
@@ -65,7 +70,7 @@ public class ViewController {
             readWeathersService.listWeathers(locationsList)
                     .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
 
