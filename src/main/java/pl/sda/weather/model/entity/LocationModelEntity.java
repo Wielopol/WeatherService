@@ -20,8 +20,8 @@ public class LocationModelEntity {
     @Column(name = "location_id")
     private String id;
 
-    @Column(name = "longitude_and_latitude", nullable = false)
-    private String longitudeAndLatitude;
+    @Column(name = "latitude_and_longitude", nullable = false)
+    private String latitudeAndLongitude;
     @Column(name = "city_name", nullable = false)
     private String cityName;
     @Column(name = "region", nullable = false)
