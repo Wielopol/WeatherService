@@ -85,6 +85,4 @@ public class LocationServiceDbImpl implements ILocationService {
         }
         System.out.println("Wrong location");
     }
-
-
 }

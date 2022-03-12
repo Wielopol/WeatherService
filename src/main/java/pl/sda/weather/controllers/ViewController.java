@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import pl.sda.weather.Gui;
 import pl.sda.weather.connection.HibernateUtil;
 import pl.sda.weather.model.entity.LocationModelEntity;
+import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
@@ -67,16 +68,22 @@ public class ViewController {
         List<LocationModelEntity> locationsList = locationService.getAllLocation();
 
         try {
-            readWeathersService.listWeathers(locationsList)
-                    .forEach(w -> System.out.println(w == null ? "There is no weather for this location" : w));
+            readWeathersService.listWeathers(locationsList);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
 
+        List<WeatherModelEntity> weathersList = readWeathersService.getAllLocation();
 
+        System.out.println("--------------------------------");
+        System.out.println("List of Weathers !!! ");
+        System.out.println("--------------------------------");
+        weathersList.forEach(System.out::println);
+        System.out.println("--------------------------------");
     }
 
     public void cleanFile() {
+        readWeathersService.cleanRecords();
         locationService.cleanRecords();
     }
 
