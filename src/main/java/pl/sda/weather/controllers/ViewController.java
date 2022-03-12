@@ -13,6 +13,7 @@ import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,14 +27,16 @@ public class ViewController {
     private static final IWeatherService readWeathersService = new WeatherServiceImpl();
 
 
-    public void addLocation() {
+    public LocationModelEntity addLocation() {
 
         LocationModelEntity model = getDataFromUserToCompleteLocationModel();
 
         if(locationService.isLocationExiest(model)){
             System.out.println("This location already exists");
+            return locationService.getLocationByIdAndName(model.getCityName());
         }else {
             locationService.saveLocationModel(model);
+            return model;
         }
     }
 
@@ -63,12 +66,12 @@ public class ViewController {
 
     }
 
-    public void displayWeathers() {
+    public void displayWeathers(int day) {
 
         List<LocationModelEntity> locationsList = locationService.getAllLocation();
 
         try {
-            readWeathersService.listWeathers(locationsList);
+            readWeathersService.listWeathers(locationsList, day);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -95,6 +98,26 @@ public class ViewController {
 
         System.out.println("--------------------------------");
         System.out.println("The location "+ pattern+ " has been removed !!");
+        System.out.println("--------------------------------");
+    }
+
+    public void showOneWeather(int day){
+        LocationModelEntity location = addLocation();
+
+        List<LocationModelEntity> locationsList = locationService.getAllLocation();
+
+        try {
+            readWeathersService.listWeathers(locationsList, day);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        WeatherModelEntity weather = readWeathersService.getWeatherByLocationId(location);
+
+        System.out.println("--------------------------------");
+        System.out.println("Weather for " + location.getCityName() + " !!! ");
+        System.out.println("--------------------------------");
+        System.out.println(weather);
         System.out.println("--------------------------------");
     }
 

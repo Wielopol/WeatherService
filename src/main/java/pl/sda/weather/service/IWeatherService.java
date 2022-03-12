@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface IWeatherService {
 
-    void listWeathers(List<LocationModelEntity> citiesList) throws Exception;
+    void listWeathers(List<LocationModelEntity> citiesList, int day) throws Exception;
 
     void cleanRecords();
 
     List<WeatherModelEntity> getAllLocation();
+
+    WeatherModelEntity getWeatherByLocationId(LocationModelEntity location);
 }

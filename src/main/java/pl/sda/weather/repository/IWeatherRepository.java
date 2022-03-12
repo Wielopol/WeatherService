@@ -9,9 +9,11 @@ public interface IWeatherRepository {
 
     void saveWeather(WeatherModelEntity weatherModelEntity);
 
-    void readWeather(LocationModelEntity city, int day);
+    WeatherModelEntity readWeather(LocationModelEntity city, int day);
 
     List<WeatherModelEntity> getAllWeatherModelData();
+
+    WeatherModelEntity getWeatherModelDataByLocationId(LocationModelEntity location);
 
     void deleteRecord(WeatherModelEntity weatherModelEntity);
 }

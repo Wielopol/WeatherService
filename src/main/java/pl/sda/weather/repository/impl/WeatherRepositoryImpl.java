@@ -1,8 +1,6 @@
 package pl.sda.weather.repository.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -15,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.sda.weather.connection.HibernateUtil;
 import pl.sda.weather.model.Coords;
-import pl.sda.weather.model.Weather;
 import pl.sda.weather.model.WeatherApi;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
@@ -27,7 +24,6 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -62,7 +58,7 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
     }
 
     @Override
-    public void readWeather(LocationModelEntity city, int day) {
+    public WeatherModelEntity readWeather(LocationModelEntity city, int day) {
         Coords coords = getCoordFromCity(city);
 
         Gson gson = new Gson();
@@ -89,7 +85,7 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
             weatherModel.setWindSpeed(w.getDaily()[day].getWind_speed());
             weatherModel.setDate(Date.valueOf(LocalDate.ofInstant(Instant.ofEpochSecond(w.getDaily()[day].getDt()), ZoneId.of("CET"))));
             weatherModel.setLocation(city);
-            saveWeather(weatherModel);
+            return weatherModel;
         } catch (IOException e) {
             System.err.println(e.getMessage());
         } finally {
@@ -102,6 +98,7 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
 
             }
         }
+        return null;
     }
 
     public Coords getCoordFromCity(LocationModelEntity city) {
@@ -161,6 +158,29 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
 
         return Collections.emptyList();
 
+    }
+
+    @Override
+    public WeatherModelEntity getWeatherModelDataByLocationId(LocationModelEntity location) {
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            WeatherModelEntity model = (WeatherModelEntity) session.createQuery("FROM WeatherModelEntity w WHERE w.location =:location")
+                    .setParameter("location", location)
+                    .getSingleResult();
+
+            transaction.commit();
+            return model;
+
+        } catch (HibernateException e) {
+            if (transaction != null)
+                transaction.rollback();
+
+            logger.error(e.getMessage(), e);
+        }
+        return null;
     }
 
     @Override

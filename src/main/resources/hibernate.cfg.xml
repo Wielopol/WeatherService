@@ -16,15 +16,15 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:postgresql://localhost:5432/weatherService2
+            jdbc:postgresql://localhost:5432/weatherService
         </property>
 
         <property name="hibernate.connection.username">
-            kamil
+            postgres
         </property>
 
         <property name="hibernate.connection.password">
-            kamil
+            hellopostgres
         </property>
 
         <!--

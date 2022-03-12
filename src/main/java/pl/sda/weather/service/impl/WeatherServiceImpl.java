@@ -13,10 +13,11 @@ public class WeatherServiceImpl implements IWeatherService {
     IWeatherRepository readWeatherRepository = new WeatherRepositoryImpl();
 
     @Override
-    public void listWeathers(List<LocationModelEntity> citiesList) {
+    public void listWeathers(List<LocationModelEntity> citiesList, int day) {
         cleanRecords();
         for (LocationModelEntity city : citiesList) {
-            readWeatherRepository.readWeather(city, 1);
+            WeatherModelEntity weather = readWeatherRepository.readWeather(city, day);
+            readWeatherRepository.saveWeather(weather);
         }
     }
 
@@ -34,5 +35,8 @@ public class WeatherServiceImpl implements IWeatherService {
         return this.readWeatherRepository.getAllWeatherModelData();
     }
 
-
+    @Override
+    public WeatherModelEntity getWeatherByLocationId(LocationModelEntity location) {
+        return this.readWeatherRepository.getWeatherModelDataByLocationId(location);
+    }
 }

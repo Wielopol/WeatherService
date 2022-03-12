@@ -34,7 +34,7 @@ public class Gui {
             switch (choose1) {
                 case "1" -> LOCATION_CONTROLLER.addLocation();
                 case "2" -> LOCATION_CONTROLLER.displayLocation();
-                case "3" -> LOCATION_CONTROLLER.displayWeathers();
+                case "3" -> chooseWeather();
                 case "4" -> LOCATION_CONTROLLER.locationSearch();
                 case "5" -> edit();
                 case "6" -> clear();
@@ -127,7 +127,9 @@ public class Gui {
                 case "2" -> LOCATION_CONTROLLER.editLocationModelInDb("regionName",pattern(), getRegionFromUser());
                 case "3" -> LOCATION_CONTROLLER.editLocationModelInDb("countryName",pattern(), getCountryNameFromUser());
                 case "4" -> LOCATION_CONTROLLER.editLocationModelInDb("coordinates",pattern(), getLongitudeAndLatitudeFromUser());
-                case "0" -> showMainMenu();
+                case "0" -> {
+                    break;
+                }
                 default -> System.out.println("Wrong choice !!");
             }
         } while (!choose1.equals("0"));
@@ -146,10 +148,79 @@ public class Gui {
             switch (choose1) {
                 case "1" -> LOCATION_CONTROLLER.cleanFile();
                 case "2" -> LOCATION_CONTROLLER.delateOneLocation();
-                case "0" -> showMainMenu();
+                case "0" -> {
+                    break;
+                }
                 default -> System.out.println("Wrong choice !!");
             }
         } while (!choose1.equals("0"));
+    }
+
+    public static void chooseWeather() {
+
+        String choose1;
+        do {
+            System.out.println("[1]. Download weather for all cities ");
+            System.out.println("[2]. Download weather for specific city ");
+            System.out.println("[0]. Back");
+
+            choose1 = scanner.nextLine();
+
+            switch (choose1) {
+                case "1" -> {
+                    chooseAllWeathersDate();
+                    choose1 = "0";
+                }
+                case "2" -> {
+                    chooseOneWeatherDate();
+                    choose1 = "0";
+                }
+                case "0" -> {
+                    break;
+                }
+                default -> System.out.println("Wrong choice !!");
+            }
+        } while (!choose1.equals("0"));
+    }
+
+    public static void chooseAllWeathersDate() {
+
+        int day;
+        do {
+            System.out.println("Enter which day forward you want to check the weathers (max. one week - 0-7)");
+            System.out.println("[0]. Today ");
+            System.out.println("[1]. Tomorrow");
+            System.out.println("[2]. Etc.");
+
+            day = Integer.parseInt(scanner.nextLine());
+
+            if (day < 0 || day > 7) {
+                System.out.println("Wrong choice !!");
+            } else {
+                LOCATION_CONTROLLER.displayWeathers(day);
+                break;
+            }
+        } while (day >= 0 && day <= 7);
+    }
+
+    public static void chooseOneWeatherDate() {
+
+        int day;
+        do {
+            System.out.println("Enter which day forward you want to check the weather (max. one week - 0-7)");
+            System.out.println("[0]. Today ");
+            System.out.println("[1]. Tomorrow");
+            System.out.println("[2]. Etc.");
+
+            day = Integer.parseInt(scanner.nextLine());
+
+            if (day < 0 || day > 7) {
+                System.out.println("Wrong choice !!");
+            } else {
+                LOCATION_CONTROLLER.showOneWeather(day);
+                break;
+            }
+        } while (day >= 0 && day <= 7);
     }
 
     public static String enterString(String info) {
