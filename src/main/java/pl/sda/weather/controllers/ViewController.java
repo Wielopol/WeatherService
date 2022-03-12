@@ -92,6 +92,10 @@ public class ViewController {
         String pattern = Gui.enterString("Enter name or id location with you looking ");
 
         locationService.delateLocationOnList(pattern);
+
+        System.out.println("--------------------------------");
+        System.out.println("The location "+ pattern+ " has been removed !!");
+        System.out.println("--------------------------------");
     }
 
     public void locationSearch() {
@@ -103,9 +107,13 @@ public class ViewController {
         if (model == null) {
             System.out.println("That location does exist");
         }
-        System.out.println(model);
 
-        System.out.println();
+        System.out.println("--------------------------------");
+        System.out.println("The location you are looking for is : ");
+        System.out.println("--------------------------------");
+        System.out.println(model);
+        System.out.println("--------------------------------");
+
 
     }
 
@@ -113,6 +121,10 @@ public class ViewController {
 
 
         locationService.editLocation(whatsEdit,pattern, editData);
+
+        System.out.println("--------------------------------");
+        System.out.println("The location "+pattern+" has been edit : ");
+        System.out.println("--------------------------------");
 
 
     }
