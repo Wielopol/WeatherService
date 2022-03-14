@@ -13,7 +13,6 @@ import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,7 +75,7 @@ public class ViewController {
             logger.error(e.getMessage(), e);
         }
 
-        List<WeatherModelEntity> weathersList = readWeathersService.getAllLocation();
+        List<WeatherModelEntity> weathersList = readWeathersService.getAllWeathers();
 
         System.out.println("--------------------------------");
         System.out.println("List of Weathers !!! ");
@@ -104,10 +103,8 @@ public class ViewController {
     public void showOneWeather(int day){
         LocationModelEntity location = addLocation();
 
-        List<LocationModelEntity> locationsList = locationService.getAllLocation();
-
         try {
-            readWeathersService.listWeathers(locationsList, day);
+            readWeathersService.listOneWeather(location, day);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

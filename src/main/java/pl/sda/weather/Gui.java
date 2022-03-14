@@ -200,7 +200,7 @@ public class Gui {
                 LOCATION_CONTROLLER.displayWeathers(day);
                 break;
             }
-        } while (day >= 0 && day <= 7);
+        } while (!(day >= 0 && day <= 7));
     }
 
     public static void chooseOneWeatherDate() {
