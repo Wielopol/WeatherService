@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface IWeatherService {
 
+    boolean doesWeatherExistForLocation(LocationModelEntity model);
+
     void listOneWeather(LocationModelEntity location, int day);
 
     void listWeathers(List<LocationModelEntity> citiesList, int day) throws Exception;

@@ -13,8 +13,22 @@ public class WeatherServiceImpl implements IWeatherService {
     IWeatherRepository readWeatherRepository = new WeatherRepositoryImpl();
 
     @Override
+    public boolean doesWeatherExistForLocation(LocationModelEntity model) {
+        List<WeatherModelEntity> list = readWeatherRepository.getAllWeatherModelData();
+        for (WeatherModelEntity weather : list) {
+            if (weather.getLocation().getLocation_id().equals(model.getLocation_id())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void listOneWeather(LocationModelEntity location, int day) {
         WeatherModelEntity weather = readWeatherRepository.readWeather(location, day);
+        if (doesWeatherExistForLocation(location)) {
+            readWeatherRepository.deleteRecord(getWeatherByLocationId(location));
+        }
         readWeatherRepository.saveWeather(weather);
     }
 
