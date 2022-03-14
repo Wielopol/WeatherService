@@ -24,9 +24,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class WeatherRepositoryImpl implements IWeatherRepository {
 
@@ -102,12 +100,13 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
     }
 
     public Coords getCoordFromCity(LocationModelEntity city) {
-        Coords coords = null;
+        int length = 0;
+        List<Coords> coords = new LinkedList<>();
 
         Gson gson = new Gson();
 
         Request request = new Request.Builder()
-                .url("http://api.openweathermap.org/geo/1.0/direct?q="+ city.getCityName() + "&limit=1&appid="+ properties.getProperty("API_KEY"))
+                .url("http://api.openweathermap.org/geo/1.0/direct?q="+ city.getCityName() + "&limit=5&appid="+ properties.getProperty("API_KEY"))
                 .get()
                 .build();
 
@@ -119,8 +118,11 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
             }
             String jsonText = response.body().string();
             JSONArray jsonArray = new JSONArray(jsonText);
-            JSONObject json = jsonArray.getJSONObject(0);
-            coords = gson.fromJson(json.toString(),Coords.class);
+            length = jsonArray.length();
+            for (int i = 0; i < length; i++) {
+                JSONObject json = jsonArray.getJSONObject(i);
+                coords.add(gson.fromJson(json.toString(),Coords.class));
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         } finally {
@@ -132,7 +134,24 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
                 }
             }
         }
-        return coords;
+        return getAccurateCoords(coords, city, length);
+    }
+
+    public Coords getAccurateCoords(List<Coords> coords, LocationModelEntity city, int limit) {
+        HashMap<Double, Coords> coordsMap = new HashMap<>();
+        Double deviation = 0d;
+        Double minDev = 1000d;
+
+        for (int i = 0; i < limit; i++) {
+            String[] cityCoords = city.getLatitudeAndLongitude().split(",");
+            deviation = Math.abs(coords.get(i).getLat() - Double.parseDouble(cityCoords[0])) + Math.abs(coords.get(i).getLon() - Double.parseDouble(cityCoords[1]));
+            coordsMap.put(deviation, coords.get(i));
+            if (deviation < minDev) {
+                minDev = deviation;
+            }
+        }
+
+        return coordsMap.get(minDev);
     }
 
     @Override
