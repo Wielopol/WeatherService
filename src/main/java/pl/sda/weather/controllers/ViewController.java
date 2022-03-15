@@ -10,11 +10,8 @@ import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
-
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
-import javax.persistence.NoResultException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 

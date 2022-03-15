@@ -1,16 +1,12 @@
 package pl.sda.weather.service;
 
 import org.junit.jupiter.api.Test;
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ILocationServiceTest {
 

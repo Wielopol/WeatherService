@@ -1,13 +1,11 @@
 package pl.sda.weather.repository.impl;
 
 import org.junit.jupiter.api.Test;
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
