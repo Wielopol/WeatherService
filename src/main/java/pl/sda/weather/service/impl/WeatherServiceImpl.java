@@ -92,7 +92,7 @@ public class WeatherServiceImpl implements IWeatherService {
             String json = response.body().string();
             WeatherApi w = gson.fromJson(json,WeatherApi.class);
             WeatherModelEntity weatherModel = new WeatherModelEntity();
-            weatherModel.setTemperature(w.getDaily()[day].getTemp().getDayTemp());
+            weatherModel.setTemperature(w.getDaily()[day].getTemp().getDay());
             weatherModel.setPressure(w.getDaily()[day].getPressure());
             weatherModel.setHumidity(w.getDaily()[day].getHumidity());
             weatherModel.setWindDir(w.getDaily()[day].getWind_deg());
