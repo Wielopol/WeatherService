@@ -1,5 +1,6 @@
 package pl.sda.weather.service;
 
+import pl.sda.weather.model.Coords;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 
@@ -12,6 +13,12 @@ public interface IWeatherService {
     void listOneWeather(LocationModelEntity location, int day);
 
     void listWeathers(List<LocationModelEntity> citiesList, int day) throws Exception;
+
+    WeatherModelEntity readWeather(LocationModelEntity city, int day);
+
+    Coords getCoordFromCity(LocationModelEntity city);
+
+    Coords getAccurateCoords(List<Coords> coords, LocationModelEntity city, int limit);
 
     void cleanRecords();
 

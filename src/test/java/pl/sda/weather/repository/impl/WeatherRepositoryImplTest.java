@@ -19,6 +19,7 @@ class WeatherRepositoryImplTest {
     IWeatherRepository weatherRepository = new WeatherRepositoryImpl();
     ILocationRepository locationRepository = new LocationRepositoryDbImpl();
     ILocationService locationService = new LocationServiceDbImpl();
+    IWeatherService weatherService = new WeatherServiceImpl();
 
     @Test
     void getWeatherModelDataByLocationId() {
@@ -28,7 +29,7 @@ class WeatherRepositoryImplTest {
         LocationModelEntity location1 = new LocationModelEntity(location_id,"48.398,9.991","Ulm","Magirus","Germany");
 
         locationRepository.saveLocation(location1);
-        WeatherModelEntity expected1 = weatherRepository.readWeather(location1,1);
+        WeatherModelEntity expected1 = weatherService.readWeather(location1,1);
         weatherRepository.saveWeather(expected1);
 
         //when
