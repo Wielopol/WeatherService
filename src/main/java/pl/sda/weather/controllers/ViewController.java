@@ -10,7 +10,6 @@ import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
-
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
 import java.util.List;
@@ -122,18 +121,13 @@ public class ViewController {
 
         String pattern = Gui.enterString("Enter name or id location with you looking ");
 
-        LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
 
-        if (model == null) {
-            System.out.println("That location does exist");
-        }
-
-        System.out.println("--------------------------------");
-        System.out.println("The location you are looking for is : ");
-        System.out.println("--------------------------------");
-        System.out.println(model);
-        System.out.println("--------------------------------");
-
+            LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
+            System.out.println("--------------------------------");
+            System.out.println("The location you are looking for is : ");
+            System.out.println("--------------------------------");
+            System.out.println(model);
+            System.out.println("--------------------------------");
 
     }
 

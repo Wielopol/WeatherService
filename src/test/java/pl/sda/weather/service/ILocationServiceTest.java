@@ -6,6 +6,8 @@ import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class ILocationServiceTest {
 
 
