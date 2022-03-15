@@ -14,7 +14,16 @@
         <java.version>17</java.version>
         <hibernate.version>5.6.5.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
+
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>2.3.2.RELEASE</version>-->
+<!--    </parent>-->
+
+
 
     <dependencies>
         <dependency>

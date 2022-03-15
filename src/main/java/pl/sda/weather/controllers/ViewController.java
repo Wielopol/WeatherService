@@ -13,6 +13,7 @@ import pl.sda.weather.service.impl.LocationServiceDbImpl;
 
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 
+import javax.persistence.NoResultException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -125,18 +126,13 @@ public class ViewController {
 
         String pattern = Gui.enterString("Enter name or id location with you looking ");
 
-        LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
 
-        if (model == null) {
-            System.out.println("That location does exist");
-        }
-
-        System.out.println("--------------------------------");
-        System.out.println("The location you are looking for is : ");
-        System.out.println("--------------------------------");
-        System.out.println(model);
-        System.out.println("--------------------------------");
-
+            LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
+            System.out.println("--------------------------------");
+            System.out.println("The location you are looking for is : ");
+            System.out.println("--------------------------------");
+            System.out.println(model);
+            System.out.println("--------------------------------");
 
     }
 

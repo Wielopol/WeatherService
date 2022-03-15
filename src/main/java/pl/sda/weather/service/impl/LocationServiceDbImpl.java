@@ -1,5 +1,8 @@
 package pl.sda.weather.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import pl.sda.weather.connection.HibernateUtil;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
@@ -8,13 +11,14 @@ import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.ILocationService;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class LocationServiceDbImpl implements ILocationService {
 
     ILocationRepository locationRepository = new LocationRepositoryDbImpl();
     IWeatherRepository weatherRepository = new WeatherRepositoryImpl();
-
+    private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
     @Override
     public boolean isLocationExiest(LocationModelEntity model) {
@@ -61,8 +65,14 @@ public class LocationServiceDbImpl implements ILocationService {
     @Override
     public LocationModelEntity getLocationByIdAndName(String patternToSearch) {
 
-        return this.locationRepository.getAllLocationModelDataByCityNameOrId(patternToSearch);
+        LocationModelEntity locationModel = new LocationModelEntity();
+        try {
+            locationModel = locationRepository.getAllLocationModelDataByCityNameOrId(patternToSearch);
+        } catch (NoResultException e) {
+            logger.error(e.getMessage(), e);
+        }
 
+        return locationModel;
     }
 
     @Override
@@ -70,7 +80,7 @@ public class LocationServiceDbImpl implements ILocationService {
 
         LocationModelEntity location = getLocationByIdAndName(pattern);
 
-        if(location != null) {
+        if (location != null) {
             if (whatEdit.equals("cityName")) {
                 location.setCityName(editData);
 
