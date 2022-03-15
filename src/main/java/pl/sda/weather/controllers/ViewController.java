@@ -102,11 +102,7 @@ public class ViewController {
     public void showOneWeather(int day){
         LocationModelEntity location = addLocation();
 
-        try {
-            readWeathersService.listOneWeather(location, day);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+        readWeathersService.listOneWeather(location, day);
 
         WeatherModelEntity weather = readWeathersService.getWeatherByLocationId(location);
 
@@ -142,8 +138,4 @@ public class ViewController {
 
 
     }
-
-
-
-
 }
