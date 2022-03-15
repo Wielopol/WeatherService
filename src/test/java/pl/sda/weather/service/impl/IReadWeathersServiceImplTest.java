@@ -60,7 +60,7 @@ class IReadWeathersServiceImplTest {
         weather1.setWindDir(167f);
         weather1.setWindSpeed(4.5f);
         weather1.setLocation(location1);
-//        WeatherModelEntity weather2 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Krakow");
+//        WeatherModelEntity weather2 = new WeatherModelEntity(14.4f,1010f,50,150f,4.5f, Date.valueOf(LocalDate.now()),location1);
 //        WeatherModelEntity weather3 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Warsaw");
 
         Map<String,WeatherModelEntity> weatherMap = new HashMap<>();
