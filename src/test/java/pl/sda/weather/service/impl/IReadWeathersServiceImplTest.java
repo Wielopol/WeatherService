@@ -2,7 +2,8 @@ package pl.sda.weather.service.impl;
 
 import org.junit.jupiter.api.Test;
 import pl.sda.weather.model.LocationModel;
-import pl.sda.weather.model.Weather;
+import pl.sda.weather.model.entity.LocationModelEntity;
+import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.repository.IWeatherRepository;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.IWeatherService;
@@ -44,29 +45,35 @@ class IReadWeathersServiceImplTest {
     @Test
     void listWeathersNotNull() {
 
-        LocationModel location1 = new LocationModel("1", "latitude: 14.22; longitude: 61.23",
+        LocationModelEntity location1 = new LocationModelEntity("1", "latitude: 14.22; longitude: 61.23",
                 "Wieliczka", "malopolskie", "Poland");
-        LocationModel location2 = new LocationModel("2", "latitude: 24.22; longitude: 41.23",
+        LocationModelEntity location2 = new LocationModelEntity("2", "latitude: 24.22; longitude: 41.23",
                 "Warsaw", "mazowieckie", "Poland");
 
-        List<LocationModel> citiesList = new ArrayList<>();
+        List<LocationModelEntity> citiesList = new ArrayList<>();
         citiesList.add(location1);
         citiesList.add(location2);
 
-        Weather weather1 = new Weather((float) 264.31, (float) 1010.5, 50, 167, (float) 4.5, "Wieliczka");
-        Weather weather2 = new Weather((float) 244.31, (float) 1012.5, 58, 157, (float) 11.5, "Krakow");
-        Weather weather3 = new Weather((float) 244.31, (float) 1012.5, 58, 157, (float) 11.5, "Warsaw");
+        WeatherModelEntity weather1 = new WeatherModelEntity();
+        weather1.setTemperature(6.4f);
+        weather1.setPressure(1010.5f);
+        weather1.setHumidity(50);
+        weather1.setWindDir(167f);
+        weather1.setWindSpeed(4.5f);
+        weather1.setLocation(location1);
+//        WeatherModelEntity weather2 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Krakow");
+//        WeatherModelEntity weather3 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Warsaw");
 
-        Map<String,Weather> weatherMap = new HashMap<>();
+        Map<String,WeatherModelEntity> weatherMap = new HashMap<>();
         weatherMap.put("Wieliczka",weather1);
-        weatherMap.put("Krakow",weather2);
-        weatherMap.put("Warsaw",weather3);
+//        weatherMap.put("Krakow",weather2);
+//        weatherMap.put("Warsaw",weather3);
 
-        List<Weather> expectedNotNull = new ArrayList<>();
+        List<WeatherModelEntity> expectedNotNull = new ArrayList<>();
         expectedNotNull.add(weather1);
-        expectedNotNull.add(weather3);
+//        expectedNotNull.add(weather3);
 
-        List<Weather> result1 = null;
+        List<WeatherModelEntity> result1 = null;
         try {
 //            result1 = weatherService.listWeathers(citiesList);
         } catch (Exception e) {
@@ -78,29 +85,29 @@ class IReadWeathersServiceImplTest {
 
     @Test
     void listWeatherNull() {
-        Weather weather1 = new Weather((float) 264.31, (float) 1010.5, 50, 167, (float) 4.5, "Wieliczka");
-        Weather weather2 = new Weather((float) 244.31, (float) 1012.5, 58, 157, (float) 11.5, "Krakow");
-        Weather weather3 = new Weather((float) 244.31, (float) 1012.5, 58, 157, (float) 11.5, "Warsaw");
+//        WeatherModelEntity weather1 = new WeatherModelEntity(264.31, 1010.5, 50, 167, 4.5, "Wieliczka");
+//        WeatherModelEntity weather2 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Krakow");
+//        WeatherModelEntity weather3 = new WeatherModelEntity(244.31, 1012.5, 58, 157, 11.5, "Warsaw");
 
-        Map<String,Weather> weatherMap = new HashMap<>();
-        weatherMap.put("Wieliczka",weather1);
-        weatherMap.put("Krakow",weather2);
-        weatherMap.put("Warsaw",weather3);
+        Map<String,WeatherModelEntity> weatherMap = new HashMap<>();
+//        weatherMap.put("Wieliczka",weather1);
+//        weatherMap.put("Krakow",weather2);
+//        weatherMap.put("Warsaw",weather3);
 
-        LocationModel location3 = new LocationModel("1", "latitude: 14.22; longitude: 61.23",
+        LocationModelEntity location3 = new LocationModelEntity("1", "latitude: 14.22; longitude: 61.23",
                 "Wielicka", "malopolskie", "Poland");
-        LocationModel location4 = new LocationModel("2", "latitude: 24.22; longitude: 41.23",
+        LocationModelEntity location4 = new LocationModelEntity("2", "latitude: 24.22; longitude: 41.23",
                 "Warszawa", "mazowieckie", "Poland");
 
-        List<LocationModel> wrongCitiesList = new ArrayList<>();
+        List<LocationModelEntity> wrongCitiesList = new ArrayList<>();
         wrongCitiesList.add(location3);
         wrongCitiesList.add(location4);
 
-        List<Weather> expectedNull = new ArrayList<>();
+        List<WeatherModelEntity> expectedNull = new ArrayList<>();
         expectedNull.add(null);
         expectedNull.add(null);
 
-        List<Weather> result2 = null;
+        List<WeatherModelEntity> result2 = null;
         try {
 //            result2 = weatherService.listWeathers(wrongCitiesList);
         } catch (Exception e) {
