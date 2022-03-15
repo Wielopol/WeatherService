@@ -1,7 +1,6 @@
 package pl.sda.weather.service.impl;
 
 import org.junit.jupiter.api.Test;
-import pl.sda.weather.model.LocationModel;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.repository.IWeatherRepository;
