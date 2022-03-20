@@ -104,7 +104,7 @@ public class ViewController {
 
         readWeathersService.listOneWeather(location, day);
 
-        WeatherModelEntity weather = readWeathersService.getWeatherByLocationId(location);
+        WeatherModelEntity weather = readWeathersService.getWeatherByLocation(location);
 
         System.out.println("--------------------------------");
         System.out.println("Weather for " + location.getCityName() + " !!! ");

@@ -59,7 +59,7 @@ public class WeatherServiceImpl implements IWeatherService {
         WeatherModelEntity weather = readWeather(location, day);
         try {
             if (doesWeatherExistForLocation(location)) {
-                readWeatherRepository.deleteRecord(getWeatherByLocationId(location));
+                readWeatherRepository.deleteRecord(getWeatherByLocation(location));
             }
             readWeatherRepository.saveWeather(weather);
         } catch (Exception e) {
@@ -192,7 +192,7 @@ public class WeatherServiceImpl implements IWeatherService {
     }
 
     @Override
-    public WeatherModelEntity getWeatherByLocationId(LocationModelEntity location) {
-        return this.readWeatherRepository.getWeatherModelDataByLocationId(location);
+    public WeatherModelEntity getWeatherByLocation(LocationModelEntity location) {
+        return this.readWeatherRepository.getWeatherModelDataByLocation(location);
     }
 }

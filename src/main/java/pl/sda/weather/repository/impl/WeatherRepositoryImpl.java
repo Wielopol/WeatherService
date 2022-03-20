@@ -58,7 +58,7 @@ public class WeatherRepositoryImpl implements IWeatherRepository {
     }
 
     @Override
-    public WeatherModelEntity getWeatherModelDataByLocationId(LocationModelEntity location) {
+    public WeatherModelEntity getWeatherModelDataByLocation(LocationModelEntity location) {
         Transaction transaction = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

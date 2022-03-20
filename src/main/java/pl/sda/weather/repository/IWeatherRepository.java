@@ -11,7 +11,7 @@ public interface IWeatherRepository {
 
     List<WeatherModelEntity> getAllWeatherModelData();
 
-    WeatherModelEntity getWeatherModelDataByLocationId(LocationModelEntity location);
+    WeatherModelEntity getWeatherModelDataByLocation(LocationModelEntity location);
 
     void deleteRecord(WeatherModelEntity weatherModelEntity);
 }

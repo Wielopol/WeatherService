@@ -43,7 +43,7 @@ public class LocationServiceDbImpl implements ILocationService {
     public void delateLocationOnList(String pattern) {
 
         LocationModelEntity location = getLocationByIdAndName(pattern);
-        WeatherModelEntity weather = weatherRepository.getWeatherModelDataByLocationId(location);
+        WeatherModelEntity weather = weatherRepository.getWeatherModelDataByLocation(location);
         this.weatherRepository.deleteRecord(weather);
         this.locationRepository.delateRecord(location);
 

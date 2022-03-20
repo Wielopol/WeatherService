@@ -33,7 +33,7 @@ class WeatherRepositoryImplTest {
         weatherRepository.saveWeather(expected1);
 
         //when
-        WeatherModelEntity result1 = weatherRepository.getWeatherModelDataByLocationId(location1);
+        WeatherModelEntity result1 = weatherRepository.getWeatherModelDataByLocation(location1);
 
         //then
 

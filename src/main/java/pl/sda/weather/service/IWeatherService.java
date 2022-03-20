@@ -24,5 +24,5 @@ public interface IWeatherService {
 
     List<WeatherModelEntity> getAllWeathers();
 
-    WeatherModelEntity getWeatherByLocationId(LocationModelEntity location);
+    WeatherModelEntity getWeatherByLocation(LocationModelEntity location);
 }
