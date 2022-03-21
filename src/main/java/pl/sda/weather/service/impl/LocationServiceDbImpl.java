@@ -10,6 +10,7 @@ import pl.sda.weather.repository.IWeatherRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.ILocationService;
+import pl.sda.weather.service.IWeatherService;
 
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -18,6 +19,7 @@ public class LocationServiceDbImpl implements ILocationService {
 
     ILocationRepository locationRepository = new LocationRepositoryDbImpl();
     IWeatherRepository weatherRepository = new WeatherRepositoryImpl();
+    IWeatherService weatherService = new WeatherServiceImpl();
     private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
     @Override
@@ -43,7 +45,10 @@ public class LocationServiceDbImpl implements ILocationService {
     public void delateLocationOnList(String pattern) {
 
         LocationModelEntity location = getLocationByIdAndName(pattern);
-        WeatherModelEntity weather = weatherRepository.getWeatherModelDataByLocation(location);
+        if (location.getLocation_id() == null) {
+            return;
+        }
+        WeatherModelEntity weather = weatherService.getWeatherByLocation(location);
         this.weatherRepository.deleteRecord(weather);
         this.locationRepository.delateRecord(location);
 

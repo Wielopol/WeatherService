@@ -33,7 +33,7 @@ public class WeatherModelEntity {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "location_id", nullable = false)
     private LocationModelEntity location;
 }

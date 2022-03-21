@@ -17,6 +17,7 @@ import pl.sda.weather.repository.IWeatherRepository;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.IWeatherService;
 
+import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
@@ -193,6 +194,13 @@ public class WeatherServiceImpl implements IWeatherService {
 
     @Override
     public WeatherModelEntity getWeatherByLocation(LocationModelEntity location) {
-        return this.readWeatherRepository.getWeatherModelDataByLocation(location);
+        WeatherModelEntity weatherModel = new WeatherModelEntity();
+        try {
+            weatherModel = readWeatherRepository.getWeatherModelDataByLocation(location);
+        } catch (NoResultException e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        return weatherModel;
     }
 }

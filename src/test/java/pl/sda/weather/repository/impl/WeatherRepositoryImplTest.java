@@ -22,7 +22,30 @@ class WeatherRepositoryImplTest {
     IWeatherService weatherService = new WeatherServiceImpl();
 
     @Test
-    void getWeatherModelDataByLocationId() {
+    void saveWeatherTest() {
+
+        String location_id = String.valueOf(UUID.randomUUID());
+        //give
+        LocationModelEntity location1 = new LocationModelEntity(location_id,"48.398,9.991","Ulm","Magirus","Germany");
+
+        locationRepository.saveLocation(location1);
+        WeatherModelEntity expected1 = weatherService.readWeather(location1,2);
+        weatherRepository.saveWeather(expected1);
+
+        //when
+        WeatherModelEntity result1 = weatherRepository.getWeatherModelDataByLocation(location1);
+
+        //then
+
+        assertEquals(result1, expected1);
+        assertNotNull(result1);
+
+        //after
+        locationService.delateLocationOnList("Ulm");
+    }
+
+    @Test
+    void getWeatherModelDataByLocationTest() {
 
         String location_id = String.valueOf(UUID.randomUUID());
         //give
@@ -38,6 +61,31 @@ class WeatherRepositoryImplTest {
         //then
 
         assertEquals(result1, expected1);
+
+        //after
+        locationService.delateLocationOnList("Ulm");
+    }
+
+    @Test
+    void deleteWeatherTest() {
+
+        String location_id = String.valueOf(UUID.randomUUID());
+        //give
+        LocationModelEntity location1 = new LocationModelEntity(location_id,"48.398,9.991","Ulm","Magirus","Germany");
+
+        locationRepository.saveLocation(location1);
+        WeatherModelEntity expected1 = weatherService.readWeather(location1,2);
+        weatherRepository.saveWeather(expected1);
+
+        //when
+        WeatherModelEntity result1 = weatherRepository.getWeatherModelDataByLocation(location1);
+
+        weatherRepository.deleteRecord(result1);
+        boolean result1Exist = weatherService.doesWeatherExistForLocation(location1);
+
+        //then
+
+        assertFalse(result1Exist);
 
         //after
         locationService.delateLocationOnList("Ulm");
