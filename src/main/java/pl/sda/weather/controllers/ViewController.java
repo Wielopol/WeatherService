@@ -5,12 +5,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.sda.weather.Gui;
 import pl.sda.weather.connection.HibernateUtil;
+import pl.sda.weather.model.LocationModelDTO;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
 import pl.sda.weather.service.impl.WeatherServiceImpl;
+import pl.sda.weather.transform.LocationTransform;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +20,8 @@ import java.util.UUID;
 public class ViewController {
 
     private static final ILocationService locationService = new LocationServiceDbImpl();
+
+    private static final LocationTransform locationTransform = new LocationTransform();
 
     private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
@@ -55,10 +59,13 @@ public class ViewController {
 
         List<LocationModelEntity> list = locationService.getAllLocation();
 
+        List<LocationModelDTO> newList = locationTransform.translateList(list);
+
+
         System.out.println("--------------------------------");
         System.out.println("List of Localization !!! ");
         System.out.println("--------------------------------");
-        list.forEach(System.out::println);
+        newList.forEach(System.out::println);
         System.out.println("--------------------------------");
 
 
@@ -119,10 +126,11 @@ public class ViewController {
 
 
             LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
+            LocationModelDTO newModel = locationTransform.locationTransformToView(model);
             System.out.println("--------------------------------");
             System.out.println("The location you are looking for is : ");
             System.out.println("--------------------------------");
-            System.out.println(model);
+            System.out.println(newModel);
             System.out.println("--------------------------------");
 
     }

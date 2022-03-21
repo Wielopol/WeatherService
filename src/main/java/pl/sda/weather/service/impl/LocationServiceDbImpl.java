@@ -3,6 +3,7 @@ package pl.sda.weather.service.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.sda.weather.connection.HibernateUtil;
+import pl.sda.weather.model.LocationModelDTO;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.repository.ILocationRepository;
@@ -10,6 +11,7 @@ import pl.sda.weather.repository.IWeatherRepository;
 import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
 import pl.sda.weather.service.ILocationService;
+import pl.sda.weather.transform.LocationTransform;
 
 import javax.persistence.NoResultException;
 import java.util.List;
