@@ -1,22 +1,26 @@
 package pl.sda.weather.service.impl;
 
 import org.junit.jupiter.api.Test;
+import pl.sda.weather.model.Coords;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
+import pl.sda.weather.repository.ILocationRepository;
 import pl.sda.weather.repository.IWeatherRepository;
+import pl.sda.weather.repository.impl.LocationRepositoryDbImpl;
 import pl.sda.weather.repository.impl.WeatherRepositoryImpl;
+import pl.sda.weather.service.ILocationService;
 import pl.sda.weather.service.IWeatherService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class IReadWeathersServiceImplTest {
 
     IWeatherRepository weatherRepository = new WeatherRepositoryImpl();
+    ILocationRepository locationRepository = new LocationRepositoryDbImpl();
+    ILocationService locationService = new LocationServiceDbImpl();
     IWeatherService weatherService = new WeatherServiceImpl();
 
 //    @Test
@@ -40,6 +44,50 @@ class IReadWeathersServiceImplTest {
 //
 //        assertThat(weather).isNull();
 //    }
+
+    @Test
+    void doesWeatherExistForLocation() {
+        String location_id = String.valueOf(UUID.randomUUID());
+        //give
+        LocationModelEntity location1 = new LocationModelEntity(location_id,"48.398,9.991","Ulm","Magirus","Germany");
+
+        locationRepository.saveLocation(location1);
+        WeatherModelEntity expected1 = weatherService.readWeather(location1,3);
+
+        boolean result0 = weatherService.doesWeatherExistForLocation(location1);
+
+        assertFalse(result0);
+
+        weatherRepository.saveWeather(expected1);
+
+        //when
+        boolean result1 = weatherService.doesWeatherExistForLocation(location1);
+
+        //then
+
+        assertTrue(result1);
+
+        //after
+        locationService.delateLocationOnList("Ulm");
+
+        boolean result2 = weatherService.doesWeatherExistForLocation(location1);
+
+        assertFalse(result2);
+    }
+
+    @Test
+    void getCoordFromCity() {
+        String location_id = String.valueOf(UUID.randomUUID());
+        //give
+        LocationModelEntity location1 = new LocationModelEntity(location_id,"48.398,9.991","Ulm","Magirus","Germany");
+
+        //when
+        Coords result1 = weatherService.getCoordFromCity(location1);
+
+        //then
+        assertEquals(48.3974003, result1.getLat());
+        assertEquals(9.9934336, result1.getLon());
+    }
 
     @Test
     void listWeathersNotNull() {
