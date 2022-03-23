@@ -13,7 +13,6 @@ import java.sql.Date;
 @AllArgsConstructor
 public class WeatherModelDTO {
 
-    private Integer id;
     private Float temperature;
     private Float pressure;
     private Integer humidity;
@@ -25,7 +24,6 @@ public class WeatherModelDTO {
     @Override
     public String toString() {
         return "Weather for " + location +
-                " with ID: " + id +
                 " for " + date +
                 " is: temperature = " + temperature +
                 ", pressure = " + pressure +

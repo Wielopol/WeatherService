@@ -13,7 +13,6 @@ public class WeatherTransform {
     public WeatherModelDTO weatherTransformToView(WeatherModelEntity weatherModelEntity) {
         WeatherModelDTO weatherModel = new WeatherModelDTO();
 
-        weatherModel.setId(weatherModelEntity.getId());
         weatherModel.setTemperature(weatherModelEntity.getTemperature());
         weatherModel.setPressure(weatherModelEntity.getPressure());
         weatherModel.setHumidity(weatherModelEntity.getHumidity());

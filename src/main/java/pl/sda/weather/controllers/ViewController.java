@@ -67,7 +67,7 @@ public class ViewController {
 
 
         System.out.println("--------------------------------");
-        System.out.println("List of localizations:");
+        System.out.println("List of locations:");
         System.out.println("--------------------------------");
         newList.forEach(System.out::println);
         System.out.println("--------------------------------");
@@ -120,8 +120,6 @@ public class ViewController {
         WeatherModelEntity weather = readWeathersService.getWeatherByLocation(location);
         WeatherModelDTO weatherDTO = weatherTransform.weatherTransformToView(weather);
 
-        System.out.println("--------------------------------");
-        System.out.println("Weather for " + location.getCityName() + ":");
         System.out.println("--------------------------------");
         System.out.println(weatherDTO);
         System.out.println("--------------------------------");

@@ -89,7 +89,7 @@ public class Gui {
     }
 
     public static String getRegionFromUser() {
-        System.out.println("Write region:");
+        System.out.println("Write region name:");
         String region = scanner.nextLine();
         if (region.equals("")) {
             region = "User did not add region";
@@ -160,8 +160,8 @@ public class Gui {
 
         String choose1;
         do {
-            System.out.println("[1]. Download weather for all cities");
-            System.out.println("[2]. Download weather for specific city");
+            System.out.println("[1]. Download weather for all locations");
+            System.out.println("[2]. Download weather for specific location");
             System.out.println("[0]. Back");
 
             choose1 = scanner.nextLine();
@@ -187,12 +187,7 @@ public class Gui {
 
         int day;
         do {
-            System.out.println("Enter which day forward you want to check the weathers (max. one week: 0-7)");
-            System.out.println("[0]. Today");
-            System.out.println("[1]. Tomorrow");
-            System.out.println("[2]. Etc.");
-
-            day = Integer.parseInt(scanner.nextLine());
+            day = Integer.parseInt(enterString("Enter which day forward you want to check the weathers (max. one week: 0-7)\n[0]. Today\n[1]. Tomorrow\n[2]. Etc."));
 
             if (day < 0 || day > 7) {
                 System.out.println("Wrong choice");
@@ -207,12 +202,7 @@ public class Gui {
 
         int day;
         do {
-            System.out.println("Enter which day forward you want to check the weather (max. one week: 0-7)");
-            System.out.println("[0]. Today");
-            System.out.println("[1]. Tomorrow");
-            System.out.println("[2]. Etc.");
-
-            day = Integer.parseInt(scanner.nextLine());
+            day = Integer.parseInt(enterString("Enter which day forward you want to check the weathers (max. one week: 0-7)\n[0]. Today\n[1]. Tomorrow\n[2]. Etc."));
 
             if (day < 0 || day > 7) {
                 System.out.println("Wrong choice");
