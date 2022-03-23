@@ -20,10 +20,10 @@ public class Gui {
         String choose1;
         do {
 
-            System.out.println("[1]. Add a location");
+            System.out.println("[1]. Add location");
             System.out.println("[2]. Display available locations");
             System.out.println("[3]. Download weather data");
-            System.out.println("[4]. Display information about a specific location");
+            System.out.println("[4]. Display information about specific location");
             System.out.println("[5]. Edit location");
             System.out.println("[6]. Clear location");
             System.out.println("[0]. Exit");
