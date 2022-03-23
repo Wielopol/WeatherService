@@ -67,7 +67,7 @@ public class ViewController {
 
 
         System.out.println("--------------------------------");
-        System.out.println("List of Localization !!! ");
+        System.out.println("List of localizations:");
         System.out.println("--------------------------------");
         newList.forEach(System.out::println);
         System.out.println("--------------------------------");
@@ -90,7 +90,7 @@ public class ViewController {
         List<WeatherModelDTO> newList = weatherTransform.translateList(weathersList);
 
         System.out.println("--------------------------------");
-        System.out.println("List of Weathers !!! ");
+        System.out.println("List of weathers:");
         System.out.println("--------------------------------");
         newList.forEach(System.out::println);
         System.out.println("--------------------------------");
@@ -103,12 +103,12 @@ public class ViewController {
 
     public void delateOneLocation(){
 
-        String pattern = Gui.enterString("Enter name or id location with you looking ");
+        String pattern = Gui.enterString("Enter city name or ID of location you're looking for");
 
         locationService.delateLocationOnList(pattern);
 
         System.out.println("--------------------------------");
-        System.out.println("The location "+ pattern+ " has been removed !!");
+        System.out.println("The location "+ pattern+ " has been removed");
         System.out.println("--------------------------------");
     }
 
@@ -121,7 +121,7 @@ public class ViewController {
         WeatherModelDTO weatherDTO = weatherTransform.weatherTransformToView(weather);
 
         System.out.println("--------------------------------");
-        System.out.println("Weather for " + location.getCityName() + " !!! ");
+        System.out.println("Weather for " + location.getCityName() + ":");
         System.out.println("--------------------------------");
         System.out.println(weatherDTO);
         System.out.println("--------------------------------");
@@ -129,13 +129,13 @@ public class ViewController {
 
     public void locationSearch() {
 
-        String pattern = Gui.enterString("Enter name or id location with you looking ");
+        String pattern = Gui.enterString("Enter name or ID of location you're looking for");
 
 
             LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
             LocationModelDTO newModel = locationTransform.locationTransformToView(model);
             System.out.println("--------------------------------");
-            System.out.println("The location you are looking for is : ");
+            System.out.println("The location you are looking for is:");
             System.out.println("--------------------------------");
             System.out.println(newModel);
             System.out.println("--------------------------------");
@@ -148,7 +148,7 @@ public class ViewController {
         locationService.editLocation(whatsEdit,pattern, editData);
 
         System.out.println("--------------------------------");
-        System.out.println("The location "+pattern+" has been edit : ");
+        System.out.println("The location "+pattern+" has been updated");
         System.out.println("--------------------------------");
 
 

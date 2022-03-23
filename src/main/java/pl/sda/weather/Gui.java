@@ -20,9 +20,9 @@ public class Gui {
         String choose1;
         do {
 
-            System.out.println("[1]. Adding a location");
-            System.out.println("[2]. Display of available locations");
-            System.out.println("[3]. Downloading weather data");
+            System.out.println("[1]. Add a location");
+            System.out.println("[2]. Display available locations");
+            System.out.println("[3]. Download weather data");
             System.out.println("[4]. Display information about a specific location");
             System.out.println("[5]. Edit location");
             System.out.println("[6]. Clear location");
@@ -39,7 +39,7 @@ public class Gui {
                 case "5" -> edit();
                 case "6" -> clear();
                 case "0" -> LOCATION_CONTROLLER.cleanFile();
-                default -> System.out.println("Wrong choice !!");
+                default -> System.out.println("Wrong choice");
             }
 
         } while (!choose1.equals("0"));
@@ -52,21 +52,21 @@ public class Gui {
         String latitude;
 
         do {
-            System.out.println("Write city latitude : ");
+            System.out.println("Write city latitude:");
             latitude = scanner.nextLine();
 
             if (!validation.validationLatitude(latitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (00.000) and rang -90 to 90 !!! ");
+                System.out.println("Enter the name, this field cannot be empty format (00.000) and rang -90 to 90");
             }
 
         } while (!validation.validationLatitude(latitude) );
 
         do {
-            System.out.println("Write city longitude : ");
+            System.out.println("Write city longitude:");
             longitude = scanner.nextLine();
 
             if (!validation.validationLongitude(longitude)) {
-                System.out.println("Enter the name, this field cannot be empty format (000.000) !!! and rang -180 to 180");
+                System.out.println("Enter the name, this field cannot be empty format (000.000) and rang -180 to 180");
             }
         } while (!validation.validationLongitude(longitude));
 
@@ -77,10 +77,10 @@ public class Gui {
 
         String cityName;
         do {
-            System.out.println("Write city name : ");
+            System.out.println("Write city name:");
             cityName = scanner.nextLine();
             if (!validation.validationNames(cityName)) {
-                System.out.println("Enter the name, this field cannot be empty !!! ");
+                System.out.println("Enter the name, this field cannot be empty");
             }
         } while (!validation.validationNames(cityName));
 
@@ -89,10 +89,10 @@ public class Gui {
     }
 
     public static String getRegionFromUser() {
-        System.out.println("Write region : ");
+        System.out.println("Write region:");
         String region = scanner.nextLine();
         if (region.equals("")) {
-            region = "User do not add regional";
+            region = "User did not add region";
         }
         return region;
     }
@@ -100,10 +100,10 @@ public class Gui {
     public static String getCountryNameFromUser() {
         String countryName;
         do {
-            System.out.println("Write country name :");
+            System.out.println("Write country name:");
             countryName = scanner.nextLine();
             if (!validation.validationNames(countryName)) {
-                System.out.println("Enter the name, this field cannot be empty !!! ");
+                System.out.println("Enter the name, this field cannot be empty");
             }
 
         } while (!validation.validationNames(countryName));
@@ -114,7 +114,7 @@ public class Gui {
 
         String choose1;
         do {
-            System.out.println("[1]. Edit city name ");
+            System.out.println("[1]. Edit city name");
             System.out.println("[2]. Edit region name");
             System.out.println("[3]. Edit country name");
             System.out.println("[4]. Edit coordinates");
@@ -130,7 +130,7 @@ public class Gui {
                 case "0" -> {
                     break;
                 }
-                default -> System.out.println("Wrong choice !!");
+                default -> System.out.println("Wrong choice");
             }
         } while (!choose1.equals("0"));
     }
@@ -139,8 +139,8 @@ public class Gui {
 
         String choose1;
         do {
-            System.out.println("[1]. Clear all location ");
-            System.out.println("[2]. Delate one location ");
+            System.out.println("[1]. Clear all locations");
+            System.out.println("[2]. Delete one location");
             System.out.println("[0]. Back");
 
             choose1 = scanner.nextLine();
@@ -151,7 +151,7 @@ public class Gui {
                 case "0" -> {
                     break;
                 }
-                default -> System.out.println("Wrong choice !!");
+                default -> System.out.println("Wrong choice");
             }
         } while (!choose1.equals("0"));
     }
@@ -160,8 +160,8 @@ public class Gui {
 
         String choose1;
         do {
-            System.out.println("[1]. Download weather for all cities ");
-            System.out.println("[2]. Download weather for specific city ");
+            System.out.println("[1]. Download weather for all cities");
+            System.out.println("[2]. Download weather for specific city");
             System.out.println("[0]. Back");
 
             choose1 = scanner.nextLine();
@@ -178,7 +178,7 @@ public class Gui {
                 case "0" -> {
                     break;
                 }
-                default -> System.out.println("Wrong choice !!");
+                default -> System.out.println("Wrong choice");
             }
         } while (!choose1.equals("0"));
     }
@@ -187,15 +187,15 @@ public class Gui {
 
         int day;
         do {
-            System.out.println("Enter which day forward you want to check the weathers (max. one week - 0-7)");
-            System.out.println("[0]. Today ");
+            System.out.println("Enter which day forward you want to check the weathers (max. one week: 0-7)");
+            System.out.println("[0]. Today");
             System.out.println("[1]. Tomorrow");
             System.out.println("[2]. Etc.");
 
             day = Integer.parseInt(scanner.nextLine());
 
             if (day < 0 || day > 7) {
-                System.out.println("Wrong choice !!");
+                System.out.println("Wrong choice");
             } else {
                 LOCATION_CONTROLLER.displayWeathers(day);
                 break;
@@ -207,15 +207,15 @@ public class Gui {
 
         int day;
         do {
-            System.out.println("Enter which day forward you want to check the weather (max. one week - 0-7)");
-            System.out.println("[0]. Today ");
+            System.out.println("Enter which day forward you want to check the weather (max. one week: 0-7)");
+            System.out.println("[0]. Today");
             System.out.println("[1]. Tomorrow");
             System.out.println("[2]. Etc.");
 
             day = Integer.parseInt(scanner.nextLine());
 
             if (day < 0 || day > 7) {
-                System.out.println("Wrong choice !!");
+                System.out.println("Wrong choice");
             } else {
                 LOCATION_CONTROLLER.showOneWeather(day);
                 break;
@@ -229,8 +229,6 @@ public class Gui {
     }
 
     public static String pattern(){
-        return enterString("Enter name city or location to edit");
+        return enterString("Enter city name or location ID to edit");
     }
-
-
 }

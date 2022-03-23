@@ -19,6 +19,6 @@ public class LocationModelDTO {
 
     @Override
     public String toString() {
-        return "Location : " +location_id + ", " + cityName + ", " +  latitudeAndLongitude+ ", " +region + ", " +countryName;
+        return "Location: " + cityName + ", " +  latitudeAndLongitude+ ", " +region + ", " +countryName + ", " +location_id;
     }
 }
