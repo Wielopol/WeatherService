@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import pl.sda.weather.Gui;
 import pl.sda.weather.connection.HibernateUtil;
 import pl.sda.weather.model.LocationModelDTO;
+import pl.sda.weather.model.WeatherModelDTO;
 import pl.sda.weather.model.entity.LocationModelEntity;
 import pl.sda.weather.model.entity.WeatherModelEntity;
 import pl.sda.weather.service.ILocationService;
@@ -13,6 +14,7 @@ import pl.sda.weather.service.IWeatherService;
 import pl.sda.weather.service.impl.LocationServiceDbImpl;
 import pl.sda.weather.service.impl.WeatherServiceImpl;
 import pl.sda.weather.transform.LocationTransform;
+import pl.sda.weather.transform.WeatherTransform;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +24,8 @@ public class ViewController {
     private static final ILocationService locationService = new LocationServiceDbImpl();
 
     private static final LocationTransform locationTransform = new LocationTransform();
+
+    private static final WeatherTransform weatherTransform = new WeatherTransform();
 
     private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
@@ -83,10 +87,12 @@ public class ViewController {
 
         List<WeatherModelEntity> weathersList = readWeathersService.getAllWeathers();
 
+        List<WeatherModelDTO> newList = weatherTransform.translateList(weathersList);
+
         System.out.println("--------------------------------");
         System.out.println("List of Weathers !!! ");
         System.out.println("--------------------------------");
-        weathersList.forEach(System.out::println);
+        newList.forEach(System.out::println);
         System.out.println("--------------------------------");
     }
 
@@ -112,11 +118,12 @@ public class ViewController {
         readWeathersService.listOneWeather(location, day);
 
         WeatherModelEntity weather = readWeathersService.getWeatherByLocation(location);
+        WeatherModelDTO weatherDTO = weatherTransform.weatherTransformToView(weather);
 
         System.out.println("--------------------------------");
         System.out.println("Weather for " + location.getCityName() + " !!! ");
         System.out.println("--------------------------------");
-        System.out.println(weather);
+        System.out.println(weatherDTO);
         System.out.println("--------------------------------");
     }
 
