@@ -23,6 +23,7 @@ The application consists of two main parts:
   * Humidity
   * Wind direction
   * Wind speed
+
 Main usage of this application is:
 * Creating a list of locations for which you are able to check weather.
 * Checking weather for locations from list.
