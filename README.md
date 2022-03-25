@@ -62,7 +62,7 @@ Then you have to enter which day you want to check the weather for. It can be ma
 Then if you have chosen weather for specific location, you have to enter location details as like as whilst adding new location.
 Then the weather is added to DB and appeared on screen (screenshot below shows option for all locations).
 
-![Display weather](./img/image13.png)
+![Display weather](./img/image6.png)
 
 4. Displaying information about location
 This function displays details about specific location. To define which location you want to check you can enter city name or location ID.
