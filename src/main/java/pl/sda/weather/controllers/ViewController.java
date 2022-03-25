@@ -37,10 +37,10 @@ public class ViewController {
 
         LocationModelEntity model = getDataFromUserToCompleteLocationModel();
 
-        if(locationService.isLocationExiest(model)){
+        if (locationService.isLocationExiest(model)) {
             System.out.println("This location already exists");
             return locationService.getLocationByIdAndName(model.getCityName());
-        }else {
+        } else {
             locationService.saveLocationModel(model);
             return model;
         }
@@ -101,18 +101,18 @@ public class ViewController {
         locationService.cleanRecords();
     }
 
-    public void delateOneLocation(){
+    public void delateOneLocation() {
 
         String pattern = Gui.enterString("Enter city name or ID of location you're looking for");
 
         locationService.delateLocationOnList(pattern);
 
         System.out.println("--------------------------------");
-        System.out.println("The location "+ pattern+ " has been removed");
+        System.out.println("The location " + pattern + " has been removed");
         System.out.println("--------------------------------");
     }
 
-    public void showOneWeather(int day){
+    public void showOneWeather(int day) {
         LocationModelEntity location = addLocation();
 
         readWeathersService.listOneWeather(location, day);
@@ -130,25 +130,28 @@ public class ViewController {
         String pattern = Gui.enterString("Enter name or ID of location you're looking for");
 
 
-            LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
-            LocationModelDTO newModel = locationTransform.locationTransformToView(model);
-            System.out.println("--------------------------------");
-            System.out.println("The location you are looking for is:");
-            System.out.println("--------------------------------");
-            System.out.println(newModel);
-            System.out.println("--------------------------------");
+        LocationModelEntity model = locationService.getLocationByIdAndName(pattern);
+        LocationModelDTO newModel = locationTransform.locationTransformToView(model);
+        System.out.println("--------------------------------");
+        System.out.println("The location you are looking for is:");
+        System.out.println("--------------------------------");
+        System.out.println(newModel);
+        System.out.println("--------------------------------");
 
     }
 
     public void editLocationModelInDb(String whatsEdit, String pattern, String editData) {
 
 
-        locationService.editLocation(whatsEdit,pattern, editData);
+        if (locationService.isLocationExiest(locationService.getLocationByIdAndName(pattern))) {
+            locationService.editLocation(whatsEdit, pattern, editData);
 
-        System.out.println("--------------------------------");
-        System.out.println("The location "+pattern+" has been updated");
-        System.out.println("--------------------------------");
+            System.out.println("--------------------------------");
+            System.out.println("The location " + pattern + " has been updated");
+            System.out.println("--------------------------------");
+        } else {
+            System.out.println("That location is not exiest !!!");
 
-
+        }
     }
 }
