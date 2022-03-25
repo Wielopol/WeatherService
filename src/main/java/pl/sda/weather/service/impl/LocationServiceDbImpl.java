@@ -75,7 +75,7 @@ public class LocationServiceDbImpl implements ILocationService {
         LocationModelEntity locationModel = new LocationModelEntity();
         try {
             locationModel = locationRepository.getAllLocationModelDataByCityNameOrId(patternToSearch);
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
 
@@ -87,25 +87,28 @@ public class LocationServiceDbImpl implements ILocationService {
 
         LocationModelEntity location = getLocationByIdAndName(pattern);
 
-        if (location != null) {
-            if (whatEdit.equals("cityName")) {
-                location.setCityName(editData);
+            if (location != null && isLocationExiest(location)) {
+                if (whatEdit.equals("cityName")) {
+                    location.setCityName(editData);
+
+                }
+                if (whatEdit.equals("countryName")) {
+                    location.setCountryName(editData);
+
+                }
+                if (whatEdit.equals("regionName")) {
+
+                    location.setRegion(editData);
+                }
+                if (whatEdit.equals("coordinates")) {
+                    location.setLatitudeAndLongitude(editData);
+                }
+
+                locationRepository.editLocation(location);
+            } else {
+                System.out.println("Wrong location");
 
             }
-            if (whatEdit.equals("countryName")) {
-                location.setCountryName(editData);
 
-            }
-            if (whatEdit.equals("regionName")) {
-
-                location.setRegion(editData);
-            }
-            if (whatEdit.equals("coordinates")) {
-                location.setLatitudeAndLongitude(editData);
-            }
-
-            locationRepository.editLocation(location);
-        }
-        System.out.println("Wrong location");
     }
 }
