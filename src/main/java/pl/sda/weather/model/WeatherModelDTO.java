@@ -25,7 +25,7 @@ public class WeatherModelDTO {
     public String toString() {
         return "Weather for " + location +
                 " for " + date +
-                " is: temperature = " + temperature +
+                " is:\n\t\t\t\t\t  temperature = " + temperature +
                 ", pressure = " + pressure +
                 ", humidity = " + humidity +
                 ", wind direction = " + windDir +
