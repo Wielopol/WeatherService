@@ -37,6 +37,7 @@ Main usage of this application is:
 
 ## Usage
 Main menu layout:
+
 ![Main menu](./img/image1.png)
  
 1. Adding new location
